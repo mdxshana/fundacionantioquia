@@ -104,7 +104,9 @@
       <!-- End Header ( Logo & Naviagtion ) -->
     </header>
     <!-- End Header -->
-    
+
+    @yield('encabezado')
+
     <!-- Start Content -->
     <div id="content">
       @yield('content')
