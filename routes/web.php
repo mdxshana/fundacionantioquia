@@ -17,6 +17,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('admin/index', 'adminController@editHome')->name('editHome');
+
 Route::group(['middleware' => ['auth', 'super']], function () {
 
     Route::get('superAdmin', function(){

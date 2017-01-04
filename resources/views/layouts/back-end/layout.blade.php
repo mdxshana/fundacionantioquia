@@ -24,6 +24,7 @@
     <header class="page-header">
         @include('layouts.back-end.menu-top')
     </header>
+
     <div class="content container-fluid">
         @yield('content')
     </div>
