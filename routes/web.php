@@ -11,6 +11,8 @@
 |
 */
 
+Route::get('home', function(){return view('layouts.back-end.index');});
+
 Route::get('/', function () {
     return view('welcome');
 });

@@ -8,6 +8,13 @@ $baseDir = dirname($vendorDir);
 return array(
     'CreateAlbunsTable' => $baseDir . '/database/migrations/2017_01_03_200145_create_albuns_table.php',
     'CreateImagensTable' => $baseDir . '/database/migrations/2017_01_03_200158_create_imagens_table.php',
+    'Collective\\Html\\Componentable' => $vendorDir . '/laravelcollective/html/src/Componentable.php',
+    'Collective\\Html\\Eloquent\\FormAccessible' => $vendorDir . '/laravelcollective/html/src/Eloquent/FormAccessible.php',
+    'Collective\\Html\\FormBuilder' => $vendorDir . '/laravelcollective/html/src/FormBuilder.php',
+    'Collective\\Html\\FormFacade' => $vendorDir . '/laravelcollective/html/src/FormFacade.php',
+    'Collective\\Html\\HtmlBuilder' => $vendorDir . '/laravelcollective/html/src/HtmlBuilder.php',
+    'Collective\\Html\\HtmlFacade' => $vendorDir . '/laravelcollective/html/src/HtmlFacade.php',
+    'Collective\\Html\\HtmlServiceProvider' => $vendorDir . '/laravelcollective/html/src/HtmlServiceProvider.php',
     'CreatePasswordResetsTable' => $baseDir . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
     'CreateServiciosTable' => $baseDir . '/database/migrations/2017_01_03_200053_create_servicios_table.php',
     'CreateTextosTable' => $baseDir . '/database/migrations/2017_01_03_200258_create_textos_table.php',
