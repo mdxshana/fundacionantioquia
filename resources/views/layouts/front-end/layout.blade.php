@@ -56,6 +56,7 @@
   {{--<link rel="stylesheet" type="text/css" href="css/colors/sky-blue.css" title="sky-blue" media="screen" />--}}
   {{--<link rel="stylesheet" type="text/css" href="css/colors/yellow.css" title="yellow" media="screen" />--}}
 
+  @yield('style')
 
 </head>
 
@@ -106,16 +107,7 @@
     
     <!-- Start Content -->
     <div id="content">
-      <div class="container">
-        <div class="page-content">
-          <div class="error-page">
-            <h1>404</h1>
-            <h3>File not Found</h3>
-            <p>We're sorry, but the page you were looking for doesn't exist.</p>
-            <div class="text-center"><a href="index.html" class="btn-system btn-small">Back To Home</a></div>
-          </div>
-        </div>
-      </div>
+      @yield('content')
     </div>
     <!-- End Content -->
 
@@ -347,6 +339,7 @@
 
   {{--<script type="text/javascript" src="js/script.js"></script>--}}
 
+@yield('script')
 </body>
 
 </html>
