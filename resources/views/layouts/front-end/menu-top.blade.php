@@ -30,13 +30,13 @@
                         <!-- <li><a href="index-08.html">Home Version 8</a></li> -->
                     </ul>
                 </li>
-                <li> <a class="active" href="about.html">Pages</a>
+                <li> <a href="about.html">Pages</a>
                     <ul class="dropdown">
                         <li><a href="about.html">About</a></li>
                         <li><a href="services.html">Services</a></li>
                         <li><a href="right-sidebar.html">Right Sidebar</a></li>
                         <li><a href="left-sidebar.html">Left Sidebar</a></li>
-                        <li><a class="active" href="404.html">404 Page</a></li>
+                        <li><a href="404.html">404 Page</a></li>
                     </ul>
                 </li>
                 <li> <a href="#">Shortcodes</a>
@@ -67,7 +67,7 @@
                         <li><a href="single-post.html">Blog Single Post</a></li>
                     </ul>
                 </li>
-                <li><a href="contact.html">Contact</a></li>
+                <li><a href="{{route('contacto')}}">Contact</a></li>
             </ul>
             <!-- End Navigation List -->
         </div>

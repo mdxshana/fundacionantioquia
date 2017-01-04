@@ -34,3 +34,9 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
     })->name('Admin');
 
 });
+
+Route::get('contacto', 'UsuarioController@contacto')->name('contacto');
+
+
+
+
