@@ -15,7 +15,8 @@
   <!-- Page Description and Author -->
   <meta name="description" content="Margo - Responsive HTML5 Template">
   <meta name="author" content="iThemesLab">
-
+  <meta name='csrf-param' content='authenticity_token'>
+  <meta name="csrf-token" content="{{ csrf_token() }}">
 
   <!-- Bootstrap CSS  -->
   {!!Html::style('front-end/asset/css/bootstrap.min.css')!!}
@@ -196,53 +197,53 @@
           <div class="col-md-3">
             <div class="footer-widget flickr-widget">
               <h4>Flicker Feed<span class="head-line"></span></h4>
-              <ul class="flickr-list">
-                <li>
-                  <a href="images/flickr-01.jpg" class="lightbox">
-                    <img alt="" src="images/flickr-01.jpg">
-                  </a>
-                </li>
-                <li>
-                  <a href="images/flickr-02.jpg" class="lightbox">
-                    <img alt="" src="images/flickr-02.jpg">
-                  </a>
-                </li>
-                <li>
-                  <a href="images/flickr-03.jpg" class="lightbox">
-                    <img alt="" src="images/flickr-03.jpg">
-                  </a>
-                </li>
-                <li>
-                  <a href="images/flickr-04.jpg" class="lightbox">
-                    <img alt="" src="images/flickr-04.jpg">
-                  </a>
-                </li>
-                <li>
-                  <a href="images/flickr-05.jpg" class="lightbox">
-                    <img alt="" src="images/flickr-05.jpg">
-                  </a>
-                </li>
-                <li>
-                  <a href="images/flickr-06.jpg" class="lightbox">
-                    <img alt="" src="images/flickr-06.jpg">
-                  </a>
-                </li>
-                <li>
-                  <a href="images/flickr-07.jpg" class="lightbox">
-                    <img alt="" src="images/flickr-07.jpg">
-                  </a>
-                </li>
-                <li>
-                  <a href="images/flickr-08.jpg" class="lightbox">
-                    <img alt="" src="images/flickr-08.jpg">
-                  </a>
-                </li>
-                <li>
-                  <a href="images/flickr-09.jpg" class="lightbox">
-                    <img alt="" src="images/flickr-09.jpg">
-                  </a>
-                </li>
-              </ul>
+              {{--<ul class="flickr-list">--}}
+                {{--<li>--}}
+                  {{--<a href="images/flickr-01.jpg" class="lightbox">--}}
+                    {{--<img alt="" src="images/flickr-01.jpg">--}}
+                  {{--</a>--}}
+                {{--</li>--}}
+                {{--<li>--}}
+                  {{--<a href="images/flickr-02.jpg" class="lightbox">--}}
+                    {{--<img alt="" src="images/flickr-02.jpg">--}}
+                  {{--</a>--}}
+                {{--</li>--}}
+                {{--<li>--}}
+                  {{--<a href="images/flickr-03.jpg" class="lightbox">--}}
+                    {{--<img alt="" src="images/flickr-03.jpg">--}}
+                  {{--</a>--}}
+                {{--</li>--}}
+                {{--<li>--}}
+                  {{--<a href="images/flickr-04.jpg" class="lightbox">--}}
+                    {{--<img alt="" src="images/flickr-04.jpg">--}}
+                  {{--</a>--}}
+                {{--</li>--}}
+                {{--<li>--}}
+                  {{--<a href="images/flickr-05.jpg" class="lightbox">--}}
+                    {{--<img alt="" src="images/flickr-05.jpg">--}}
+                  {{--</a>--}}
+                {{--</li>--}}
+                {{--<li>--}}
+                  {{--<a href="images/flickr-06.jpg" class="lightbox">--}}
+                    {{--<img alt="" src="images/flickr-06.jpg">--}}
+                  {{--</a>--}}
+                {{--</li>--}}
+                {{--<li>--}}
+                  {{--<a href="images/flickr-07.jpg" class="lightbox">--}}
+                    {{--<img alt="" src="images/flickr-07.jpg">--}}
+                  {{--</a>--}}
+                {{--</li>--}}
+                {{--<li>--}}
+                  {{--<a href="images/flickr-08.jpg" class="lightbox">--}}
+                    {{--<img alt="" src="images/flickr-08.jpg">--}}
+                  {{--</a>--}}
+                {{--</li>--}}
+                {{--<li>--}}
+                  {{--<a href="images/flickr-09.jpg" class="lightbox">--}}
+                    {{--<img alt="" src="images/flickr-09.jpg">--}}
+                  {{--</a>--}}
+                {{--</li>--}}
+              {{--</ul>--}}
             </div>
           </div>
           <!-- .col-md-3 -->
@@ -341,6 +342,16 @@
 
   {{--<script type="text/javascript" src="js/script.js"></script>--}}
 
+  <!-- Modal Bootstrap-->
+  <div id='modalBs' class='modal fade'>
+    <div class="modal-dialog">
+      <div class="modal-content">
+      </div>
+    </div>
+  </div>
+
+
+  {!!Html::script('js/inicio.js')!!}
 @yield('script')
 </body>
 
