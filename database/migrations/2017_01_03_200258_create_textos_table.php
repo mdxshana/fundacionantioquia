@@ -16,7 +16,8 @@ class CreateTextosTable extends Migration
         Schema::create('textos', function (Blueprint $table) {
             $table->increments('id');
             $table->string('titulo');
-            $table->string('texto');
+            $table->mediumText('texto');
+            $table->enum('vista', ['index', 'nosotros', 'servicios', 'pdf']);
             $table->timestamps();
         });
     }

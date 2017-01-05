@@ -11,4 +11,9 @@ class Albun extends Model
     protected $fillable = [
         'nombre', 'tipo'
     ];
+
+    public function getImagenes()
+    {
+        return $this->hasMany('App\Imagen');
+    }
 }
