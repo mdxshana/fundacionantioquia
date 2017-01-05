@@ -110,38 +110,38 @@
                 </ul>
             </li>
             <li class="divider"></li>
-            <li class="hidden-phone">
+{{--            <li class="hidden-phone">
                 <a href="#" id="settings" data-toggle="popover" data-placement="bottom" title="">
                     <i class="icon-cog"></i>
                 </a>
-            </li>
+            </li>--}}
             <li class="hidden-phone dropdown">
                 <a href="#" title="Account" id="account" class="dropdown-toggle" data-toggle="dropdown">
                     <i class="icon-user"></i>
                 </a>
                 <ul id="account-menu" class="dropdown-menu account" role="menu">
                     <li role="presentation" class="account-picture">
-                        <img src="img/2.jpg" alt="" />
-                        Philip Daineka
+                        {{--<img src="img/2.jpg" alt="" />--}}
+                        {{Auth::user()->nombre." ".Auth::user()->apellido}}
                     </li>
                     <li role="presentation">
                         <a href="form_account.html" class="link">
                             <i class="icon-user"></i>
-                            Profile
+                            Perfil
                         </a>
                     </li>
-                    <li role="presentation">
-                        <a href="component_calendar.html" class="link">
-                            <i class="icon-calendar"></i>
-                            Calendar
-                        </a>
-                    </li>
-                    <li role="presentation">
-                        <a href="#" class="link">
-                            <i class="icon-inbox"></i>
-                            Inbox
-                        </a>
-                    </li>
+                    {{--<li role="presentation">--}}
+                        {{--<a href="component_calendar.html" class="link">--}}
+                            {{--<i class="icon-calendar"></i>--}}
+                            {{--Calendar--}}
+                        {{--</a>--}}
+                    {{--</li>--}}
+                    {{--<li role="presentation">--}}
+                        {{--<a href="#" class="link">--}}
+                            {{--<i class="icon-inbox"></i>--}}
+                            {{--Inbox--}}
+                        {{--</a>--}}
+                    {{--</li>--}}
                 </ul>
             </li>
             <li class="visible-phone">
@@ -149,7 +149,7 @@
                     <i class="icon-reorder"></i>
                 </a>
             </li>
-            <li class="hidden-phone"><a href="login.html"><i class="icon-signout"></i></a></li>
+            <li class="hidden-phone"><a href="{{route("logout")}}"><i class="icon-signout" title="Cerrar Sesión"></i></a></li>
         </ul>
         <form class="navbar-search pull-right" />
         <input type="search" class="search-query" placeholder="Search..." />

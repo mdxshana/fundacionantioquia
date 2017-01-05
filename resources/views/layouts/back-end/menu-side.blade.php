@@ -59,7 +59,7 @@
             </ul>
         </li>
         <li class="visible-phone">
-            <a href="login.html"><i class="icon-signout"></i> <span class="name">Sign Out</span></a>
+            <a href="{{route("logout")}}"><i class="icon-signout"></i> <span class="name">Cerrar Sesión</span></a>
         </li>
     </ul>
     <div id="sidebar-settings" class="settings">
