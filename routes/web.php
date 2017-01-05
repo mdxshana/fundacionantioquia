@@ -16,7 +16,7 @@ Route::post('login', ['as' =>'login', 'uses' => 'Auth\LoginController@login']);
 Route::get('logout', ['as' => 'logout', 'uses' => 'Auth\LoginController@logout']);
 
 
-Route::get('home', function(){return view('layouts.front-end.layout');});
+Route::get('home', function(){return view('layouts.back-end.layout');});
 
 Route::get('/', function () {
     return view('welcome');

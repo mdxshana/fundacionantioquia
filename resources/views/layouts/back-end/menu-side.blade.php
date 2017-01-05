@@ -1,69 +1,113 @@
-<nav id="sidebar" class="sidebar nav-collapse collapse">
-    <ul id="side-nav" class="side-nav">
-        <li>
-            <a href="index.html"><i class="icon-desktop"></i> <span class="name">Dashboard</span></a>
-        </li>
-        <li class="accordion-group">
-            <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#side-nav" href="#forms-collapse"><i class="icon-edit"></i> <span class="name">Forms</span></a>
-            <ul id="forms-collapse" class="accordion-body collapse">
-                <li><a href="form_account.html">Account</a></li>
-                <li><a href="form_article.html">Article</a></li>
-                <li><a href="form_elements.html">Elements</a></li>
-                <li><a href="form_validation.html">Validation</a></li>
-                <li><a href="form_wizard.html">Wizard</a></li>
-            </ul>
-        </li>
-        <li class="accordion-group">
-            <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#side-nav" href="#stats-collapse"><i class="icon-bar-chart"></i> <span class="name">Statistics</span></a>
-            <ul id="stats-collapse" class="accordion-body collapse">
-                <li><a href="stat_statistics.html">Stats</a></li>
-                <li><a href="stat_charts.html">Charts</a></li>
-                <li><a href="stat_realtime.html">Realtime</a></li>
-            </ul>
-        </li>
-        <li class="accordion-group">
-            <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#side-nav" href="#ui-collapse"><i class="icon-magic"></i> <span class="name">User Interface</span></a>
-            <ul id="ui-collapse" class="accordion-body collapse">
-                <li><a href="ui_buttons.html">Buttons</a></li>
-                <li><a href="ui_dialogs.html">Dialogs</a></li>
-                <li><a href="ui_icons.html">Icons</a></li>
-                <li><a href="ui_tabs.html">Tabs</a></li>
-                <li><a href="ui_accordion.html">Accordion</a></li>
-            </ul>
-        </li>
-        <li class="accordion-group">
-            <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#side-nav" href="#components-collapse"><i class="icon-bookmark-empty"></i> <span class="name">Components</span></a>
-            <ul id="components-collapse" class="accordion-body collapse">
-                <li><a href="component_calendar.html">Calendar</a></li>
-                <li><a href="component_maps.html">Maps</a></li>
-                <li><a href="component_gallery.html">Gallery</a></li>
-                <li><a href="component_fileupload.html">Fileupload</a></li>
-            </ul>
-        </li>
-        <li class="accordion-group">
-            <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#side-nav" href="#tables-collapse"><i class="icon-table"></i> <span class="name">Tables</span></a>
-            <ul id="tables-collapse" class="accordion-body collapse">
-                <li><a href="tables_static.html">Static</a></li>
-                <li><a href="tables_dynamic.html">Dynamic</a></li>
-            </ul>
-        </li>
-        <li class="active">
-            <a href="grid.html"><i class="icon-reorder"></i> <span class="name">Grid</span></a>
-        </li>
-        <li class="accordion-group">
-            <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#side-nav" href="#special-collapse"><i class="icon-asterisk"></i> <span class="name">Special</span></a>
-            <ul id="special-collapse" class="accordion-body collapse">
-                <li><a href="special_search.html">Search</a></li>
-                <li><a href="login.html">Login</a></li>
-                <li><a href="special_404.html">404</a></li>
-            </ul>
-        </li>
-        <li class="visible-phone">
-            <a href="{{route("logout")}}"><i class="icon-signout"></i> <span class="name">Cerrar Sesión</span></a>
-        </li>
-    </ul>
-    <div id="sidebar-settings" class="settings">
-        <button type="button" data-value="icons" class="btn-icons btn btn-transparent btn-small">Icons</button>
-        <button type="button" data-value="auto" class="btn-auto btn btn-transparent btn-small">Auto</button>
+<div id="left-menu">
+    <div class="sub-left-menu scroll">
+        <ul class="nav nav-list">
+            <li><div class="left-bg"></div></li>
+            <li class="time">
+                <h1 class="animated fadeInLeft">21:00</h1>
+                <p class="animated fadeInRight">Sat,October 1st 2029</p>
+            </li>
+            <li class="active ripple">
+                <a class="tree-toggle nav-header"><span class="fa-home fa"></span> Editar Home
+                    <span class="fa-angle-right fa right-arrow text-right"></span>
+                </a>
+                <ul class="nav nav-list tree">
+                    <li><a href="dashboard-v1.html">Dashboard v.1</a></li>
+                    <li><a href="dashboard-v2.html">Dashboard v.2</a></li>
+                </ul>
+            </li>
+            <li class="ripple">
+                <a class="tree-toggle nav-header">
+                    <span class="fa-diamond fa"></span> Layout
+                    <span class="fa-angle-right fa right-arrow text-right"></span>
+                </a>
+                <ul class="nav nav-list tree">
+                    <li><a href="topnav.html">Top Navigation</a></li>
+                    <li><a href="boxed.html">Boxed</a></li>
+                </ul>
+            </li>
+            <li class="ripple">
+                <a class="tree-toggle nav-header">
+                    <span class="fa-area-chart fa"></span> Charts
+                    <span class="fa-angle-right fa right-arrow text-right"></span>
+                </a>
+                <ul class="nav nav-list tree">
+                    <li><a href="chartjs.html">ChartJs</a></li>
+                    <li><a href="morris.html">Morris</a></li>
+                    <li><a href="flot.html">Flot</a></li>
+                    <li><a href="sparkline.html">SparkLine</a></li>
+                </ul>
+            </li>
+            <li class="ripple"><a class="tree-toggle nav-header">
+                    <span class="fa fa-pencil-square"></span> Ui Elements  <span class="fa-angle-right fa right-arrow text-right"></span> </a>
+                <ul class="nav nav-list tree">
+                    <li><a href="color.html">Color</a></li>
+                    <li><a href="weather.html">Weather</a></li>
+                    <li><a href="typography.html">Typography</a></li>
+                    <li><a href="icons.html">Icons</a></li>
+                    <li><a href="buttons.html">Buttons</a></li>
+                    <li><a href="media.html">Media</a></li>
+                    <li><a href="panels.html">Panels & Tabs</a></li>
+                    <li><a href="notifications.html">Notifications & Tooltip</a></li>
+                    <li><a href="badges.html">Badges & Label</a></li>
+                    <li><a href="progress.html">Progress</a></li>
+                    <li><a href="sliders.html">Sliders</a></li>
+                    <li><a href="timeline.html">Timeline</a></li>
+                    <li><a href="modal.html">Modals</a></li>
+                </ul>
+            </li>
+            <li class="ripple"><a class="tree-toggle nav-header"><span class="fa fa-check-square-o"></span> Forms  <span class="fa-angle-right fa right-arrow text-right"></span> </a>
+                <ul class="nav nav-list tree">
+                    <li><a href="formelement.html">Form Element</a></li>
+                    <li><a href="#">Wizard</a></li>
+                    <li><a href="#">File Upload</a></li>
+                    <li><a href="#">Text Editor</a></li>
+                </ul>
+            </li>
+            <li class="ripple"><a class="tree-toggle nav-header"><span class="fa fa-table"></span> Tables  <span class="fa-angle-right fa right-arrow text-right"></span> </a>
+                <ul class="nav nav-list tree">
+                    <li><a href="datatables.html">Data Tables</a></li>
+                    <li><a href="handsontable.html">handsontable</a></li>
+                    <li><a href="tablestatic.html">Static</a></li>
+                </ul>
+            </li>
+            <li class="ripple"><a href="calendar.html"><span class="fa fa-calendar-o"></span>Calendar</a></li>
+            <li class="ripple"><a class="tree-toggle nav-header"><span class="fa fa-envelope-o"></span> Mail <span class="fa-angle-right fa right-arrow text-right"></span> </a>
+                <ul class="nav nav-list tree">
+                    <li><a href="mail-box.html">Inbox</a></li>
+                    <li><a href="compose-mail.html">Compose Mail</a></li>
+                    <li><a href="view-mail.html">View Mail</a></li>
+                </ul>
+            </li>
+            <li class="ripple"><a class="tree-toggle nav-header"><span class="fa fa-file-code-o"></span> Pages  <span class="fa-angle-right fa right-arrow text-right"></span> </a>
+                <ul class="nav nav-list tree">
+                    <li><a href="forgotpass.html">Forgot Password</a></li>
+                    <li><a href="login.html">SignIn</a></li>
+                    <li><a href="reg.html">SignUp</a></li>
+                    <li><a href="article-v1.html">Article v1</a></li>
+                    <li><a href="search-v1.html">Search Result v1</a></li>
+                    <li><a href="productgrid.html">Product Grid</a></li>
+                    <li><a href="profile-v1.html">Profile v1</a></li>
+                    <li><a href="invoice-v1.html">Invoice v1</a></li>
+                </ul>
+            </li>
+            <li class="ripple"><a class="tree-toggle nav-header"><span class="fa "></span> MultiLevel  <span class="fa-angle-right fa right-arrow text-right"></span> </a>
+                <ul class="nav nav-list tree">
+                    <li><a href="view-mail.html">Level 1</a></li>
+                    <li><a href="view-mail.html">Level 1</a></li>
+                    <li class="ripple">
+                        <a class="sub-tree-toggle nav-header">
+                            <span class="fa fa-envelope-o"></span> Level 1
+                            <span class="fa-angle-right fa right-arrow text-right"></span>
+                        </a>
+                        <ul class="nav nav-list sub-tree">
+                            <li><a href="mail-box.html">Level 2</a></li>
+                            <li><a href="compose-mail.html">Level 2</a></li>
+                            <li><a href="view-mail.html">Level 2</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li><a href="credits.html">Credits</a></li>
+        </ul>
     </div>
-</nav>
+</div>
