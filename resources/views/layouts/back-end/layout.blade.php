@@ -69,11 +69,33 @@
 {{--<script src="js/bootstrap/bootstrap-tab.js"> </script>--}}
 
 
+{!!Html::script('back-end/lib/wysihtml5/wysihtml5-0.3.0_rc2.js')!!}
+{!!Html::script('back-end/lib/bootstrap-wysihtml5/bootstrap-wysihtml5.js')!!}
+
 <!-- basic application js-->
 {!!Html::script('back-end/js/app.js')!!}
 {!!Html::script('back-end/js/settings.js')!!}
 {{--<script src="js/app.js"></script>--}}
 {{--<script src="js/settings.js"></script>--}}
+
+
+<script type="text/template" id="sidebar-settings-template">
+    <% auto = sidebarState == 'auto'%>
+    <% if (auto) {%>
+    <button type="button"
+            data-value="icons"
+            class="btn-icons btn btn-transparent btn-small">Icons</button>
+    <button type="button"
+            data-value="auto"
+            class="btn-auto btn btn-transparent btn-small">Auto</button>
+    <%} else {%>
+    <button type="button"
+            data-value="auto"
+            class="btn btn-transparent btn-small">Auto</button>
+    <% } %>
+</script>
+
+
 
 
 

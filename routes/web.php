@@ -23,6 +23,7 @@ Route::get('/', function () {
 });
 
 
+Route::post('admin/subirimagen', 'AdminController@subirImagen')->name('subirImagen');
 
 Route::group(['middleware' => ['auth', 'super']], function () {
 
