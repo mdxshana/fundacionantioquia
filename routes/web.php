@@ -36,6 +36,7 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
 });
 
 Route::get('contacto', 'UsuarioController@contacto')->name('contacto');
+Route::post('enviarMensaje', 'EmailController@enviarMensaje')->name('enviarMensaje');
 
 
 

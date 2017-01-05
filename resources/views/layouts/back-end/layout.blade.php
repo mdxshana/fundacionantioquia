@@ -12,7 +12,8 @@
     <meta name="author" content="" />
     <meta charset="utf-8" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-
+    <meta name='csrf-param' content='authenticity_token'>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     @yield('style')
 </head>
 
@@ -67,12 +68,25 @@
 {{--<script src="js/bootstrap/bootstrap-modal.js"></script>--}}
 {{--<script src="js/bootstrap/bootstrap-tab.js"> </script>--}}
 
+
 <!-- basic application js-->
 {!!Html::script('back-end/js/app.js')!!}
 {!!Html::script('back-end/js/settings.js')!!}
 {{--<script src="js/app.js"></script>--}}
 {{--<script src="js/settings.js"></script>--}}
 
+
+
+<!-- Modal Bootstrap-->
+<div id='modalBs' class='modal fade'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+        </div>
+    </div>
+</div>
+
+
+{!!Html::script('js/inicio.js')!!}
 
 @yield('script')
 

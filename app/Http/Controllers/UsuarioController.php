@@ -15,4 +15,7 @@ class UsuarioController extends Controller
     {
         return view("usuario.contacto");
     }
+
+
+
 }
