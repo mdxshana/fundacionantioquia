@@ -11,13 +11,18 @@
 |
 */
 
+Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
+Route::post('login', ['as' =>'login', 'uses' => 'Auth\LoginController@login']);
+Route::get('logout', ['as' => 'logout', 'uses' => 'Auth\LoginController@logout']);
+
+
 Route::get('home', function(){return view('layouts.front-end.layout');});
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('admin/index', 'adminController@editHome')->name('editHome');
+
 
 Route::group(['middleware' => ['auth', 'super']], function () {
 
@@ -29,9 +34,7 @@ Route::group(['middleware' => ['auth', 'super']], function () {
 
 Route::group(['middleware' => ['auth', 'admin']], function () {
 
-    Route::get('admin', function(){
-        return "Hola admin";
-    })->name('Admin');
+    Route::get('admin/index', 'adminController@editHome')->name('editHome');
 
 });
 
