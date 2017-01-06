@@ -1,73 +1,120 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Light Blue - Admin Template</title>
-    {!!Html::style('back-end/css/application.min.css')!!}
-    <link rel="shortcut icon" href="img/favicon.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
-    <meta charset="utf-8" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
-<body>
-<div class="single-widget-container">
-    <section class="widget login-widget">
-        <header class="text-align-center">
-            <h4>Ingrese a su cuenta</h4>
-        </header>
-        <div class="body">
-            {!!Form::open(['route' => 'login','class'=>'no-margin'])!!}
-            <fieldset>
-                <div class="control-group no-margin">
-                    <label class="control-label" for="email">Email</label>
-                    <div class="control">
-                        <div class="input-prepend input-padding-increased">
-                                <span class="add-on">
-                                    <i class="eicon-user icon-large"></i>
-                                </span>
-                            <input id="email" type="email" placeholder="tu Email" name="email" />
+
+    <meta charset="utf-8">
+    <meta name="description" content="Miminium Admin Template v.1">
+    <meta name="author" content="Isna Nur Azis">
+    <meta name="keyword" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Iniciar Sesión</title>
+
+    <!-- start: Css -->
+    {!!Html::style('back-end/css/bootstrap.min.css')!!}
+
+    <!-- plugins -->
+    {!!Html::style('back-end/css/plugins/font-awesome.min.css')!!}
+    {!!Html::style('back-end/css/plugins/simple-line-icons.css')!!}
+    {!!Html::style('back-end/css/plugins/animate.min.css')!!}
+    {!!Html::style('back-end/css/plugins/icheck/skins/flat/aero.css')!!}
+    {!!Html::style('back-end/css/style.css')!!}
+    <!-- end: Css -->
+
+    <link rel="shortcut icon" href="asset/img/logomi.png">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+        {!!Html::script('back-end/js/html5shiv.min.js')!!}
+        {!!Html::script('back-end/js/respond.min.js')!!}
+        <!--<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>-->
+    {{--<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>--}}
+    <![endif]-->
+</head>
+
+<body id="mimin" class="dashboard form-signin-wrapper">
+
+<div class="container">
+
+    {!!Form::open(['route' => 'login','class'=>'form-signin',"id"=>"login"])!!}
+        <div class="panel periodic-login" style="margin-top: 50%;" >
+            {{--<span class="atomic-number">28</span>--}}
+            <div class="panel-body text-center">
+                {{--<h4 class="atomic-symbol">Iniciar Sesión</h4>--}}
+                {{--<p class="atomic-mass">14.072110</p>--}}
+                {{--<p class="element-name">Miminium</p>--}}
+                <h3>Iniciar Sesión</h3>
+                {{--<i class="icons icon-arrow-down"></i>--}}
+                <div class="form-group form-animate-text" style="margin-top:40px !important;">
+                    {{--<input type="email" class="form-text" name="email" required>--}}
+                    {!!Form::text('email',"",['class'=>'form-text','id'=>'email' , 'required'])!!}
+                    <span class="bar"></span>
+                    <label>Email</label>
+                </div>
+                <div class="form-group form-animate-text" style="margin-top:40px !important;">
+                    {!!Form::password('password',['class'=>'form-text','id'=>'password' ,'required'])!!}
+                    {{--<input type="password" class="form-text" name="password" required>--}}
+                    <span class="bar"></span>
+                    <label>Contraseña</label>
+                </div>
+
+                <div class="row">
+                    @if (count($errors) > 0)
+                        <div class="alert alert-danger">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close" style="text-decoration: none; color: #000;">&times;</a>
+                            <strong>Ups!</strong> Favor corregir los siguientes errores.<br><br>
+                            <ul class="text-left">
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
                         </div>
+                    @endif
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12">
+                        <label class="pull-left">
+                            <input type="checkbox" class="icheck pull-left" name="remember"/> Remember me
+                        </label>
+                    </div>
+                    <div class="col-xs-12">
+                        <input type="submit" class="btn col-md-12" value="SignIn"/>
                     </div>
                 </div>
 
-                <div class="control-group">
-                    <label class="control-label" for="password">Contraseña</label>
-                    <div class="control">
-                        <div class="input-prepend input-padding-increased">
-                                <span class="add-on">
-                                    <i class="icon-lock icon-large"></i>
-                                </span>
-                            <input id="password" type="password" name="password" placeholder="tu contraseña" />
-                        </div>
-                    </div>
-                </div>
-            </fieldset>
-            @if (count($errors) > 0)
-                <div class="alert alert-danger">
-                    <a href="#" class="close" data-dismiss="alert" aria-label="close" style="text-decoration: none; color: #000;">&times;</a>
-                    <strong>Ups!</strong> Favor corregir los siguientes errores.<br><br>
-                    <ul class="text-left">
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
-            <div class="form-actions">
-                <button type="submit" class="btn btn-block btn-large btn-danger">
-                    <span class="small-circle"><i class="icon-caret-right"></i></span>
-                    <small>Iniciar Sesión</small>
-                </button>
-                <div class="forgot"><a class="forgot" href="#">Olvidaste tu contraseña?</a></div>
+
+
             </div>
-            {!!Form::close()!!}
+            <div class="text-center" style="padding:5px;">
+                <a href="forgotpass.html">Forgot Password </a>
+                <a href="reg.html">| Signup</a>
+            </div>
         </div>
-    </section>
+    {!!Form::close()!!}
+
 </div>
 
-{!!Html::script('back-end/lib/jquery/jquery.1.9.0.min.js')!!}
-{!!Html::script('back-end/lib/backbone/underscore-min.js')!!}
-{!!Html::script('back-end/js/settings.js')!!}
-{!!Html::script('back-end/js/bootstrap/bootstrap-alert.js')!!}
+<!-- end: Content -->
+<!-- start: Javascript -->
+{!!Html::script('back-end/js/jquery.min.js')!!}
+{!!Html::script('back-end/js/jquery.ui.min.js')!!}
+{!!Html::script('back-end/js/bootstrap.min.js')!!}
+
+
+{!!Html::script('back-end/js/plugins/moment.min.js')!!}
+{!!Html::script('back-end/js/plugins/icheck.min.js')!!}
+
+<!-- custom -->
+{!!Html::script('back-end/js/main.js')!!}
+<script type="text/javascript">
+    $(document).ready(function(){
+
+        $("#email").html("");
+        $('input').iCheck({
+            checkboxClass: 'icheckbox_flat-aero',
+            radioClass: 'iradio_flat-aero'
+        });
+    });
+</script>
+<!-- end: Javascript -->
 </body>
 </html>
