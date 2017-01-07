@@ -18,9 +18,7 @@ Route::get('logout', ['as' => 'logout', 'uses' => 'Auth\LoginController@logout']
 
 Route::get('home', function(){return view('layouts.back-end.layout');});
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'UsuarioController@home');
 
 
 Route::post('admin/subirimagen', 'AdminController@subirImagen')->name('subirImagen');
@@ -35,7 +33,11 @@ Route::group(['middleware' => ['auth', 'super']], function () {
 
 Route::group(['middleware' => ['auth', 'admin']], function () {
 
-    Route::get('admin/index', 'adminController@editHome')->name('editHome');
+    Route::get('admin/index', 'AdminController@editHome')->name('editHome');
+    Route::post('admin/subirimagen', 'AdminController@subirImagen')->name('subirImagen');
+    Route::post('admin/borrarImagen', 'AdminController@deleteImage')->name('deleteImage');
+
+    Route::post('admin/editarTextos', 'AdminController@editTexto')->name('editTexto');
 
 });
 
