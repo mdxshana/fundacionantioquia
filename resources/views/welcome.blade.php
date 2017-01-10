@@ -1,91 +1,119 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layouts.front-end.layout')
 
-        <title>Laravel</title>
-
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
-
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Raleway', sans-serif;
-                font-weight: 100;
-                height: 100vh;
-                margin: 0;
+@section('style')
+    <title>Fundación Antioquía</title>
+    <style>
+        #content{
+            padding: 0;
+        }
+        @media (max-width: 450px) {
+            .carousel-inner>.item>img {
+                height: 300px;!important;
             }
-
-            .full-height {
-                height: 100vh;
+        }
+        @media (min-width:451px) and (max-width: 800px){
+            .carousel-inner>.item>img {
+                height: 400px;!important;
             }
-
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
+        }
+        @media (min-width:801px) and (max-width: 991px){
+            .carousel-inner>.item>img {
+                height: 450px;!important;
             }
-
-            .position-ref {
-                position: relative;
+        }
+        @media (min-width:992px) and (max-width: 1199px){
+            .carousel-inner>.item>img {
+                height: 500px;!important;
             }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
+        }
+        @media (min-width: 1200px){
+            .carousel-inner>.item>img {
+                height: 600px;!important;
             }
+        }
+        p{
+            font-size: 16px;
+            color: #101010;
+            line-height: 25px;
+        }
+        .big-title h1 strong{
+            font-weight: 700;!important;
+        }
+    </style>
+@endsection
 
-            .content {
-                text-align: center;
-            }
 
-            .title {
-                font-size: 84px;
-            }
 
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 12px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
+@section('content')
+    <section id="home">
+        <!-- Carousel -->
+        <div id="main-slide" class="carousel slide" data-ride="carousel">
 
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    <a href="{{ url('/login') }}">Login</a>
-                    <a href="{{ url('/register') }}">Register</a>
-                </div>
-            @endif
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+                @for($i=0; $i<count($galeria); $i++)
+                    <li data-target="#main-slide" data-slide-to="{{$i}}" {{($i==0)?'class=active':''}}></li>
+                @endfor
+            </ol>
+            <!--/ Indicators end-->
 
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
+            <!-- Carousel inner -->
+            <div class="carousel-inner">
+                @foreach($galeria as $clave => $foto)
+                    <div class="item {{($clave==0)?'active':''}}">
+                        <img class="fotoSlider" src="images/{{$foto}}" alt="slider" style="max-height: 600px; min-height: 200px">
+                        {{--<div class="slider-content">--}}
+                            {{--<div class="col-md-12 text-center">--}}
+                                {{--<h2 class="animated2">--}}
+                                    {{--<span>Welcome to <strong>Margo</strong></span>--}}
+                                {{--</h2>--}}
+                                {{--<h3 class="animated3">--}}
+                                    {{--<span>The ultimate aim of your business</span>--}}
+                                {{--</h3>--}}
+                                {{--<p class="animated4"><a href="#" class="slider btn btn-system btn-large">Check Now</a>--}}
+                                {{--</p>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+                    </div>
+                @endforeach
+            </div>
+            <!-- Carousel inner end-->
 
-                <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+            <!-- Controls -->
+            <a class="left carousel-control" href="#main-slide" data-slide="prev">
+                <span><i class="fa fa-angle-left"></i></span>
+            </a>
+            <a class="right carousel-control" href="#main-slide" data-slide="next">
+                <span><i class="fa fa-angle-right"></i></span>
+            </a>
+        </div>
+        <!-- /carousel -->
+    </section>
+
+    <div class=" section pricing-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- Start Big Heading -->
+                    <div class="big-title text-center">
+                        <h1> <strong>Filosofía</strong></h1>
+                    </div>
+                    <!-- End Big Heading -->
+
+                    <!-- Text -->
+
+                    <p class="text-justify">
+                        {!!$texto!!}
+                    </p>
+
+                    {{--<p class="text-center">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>--}}
                 </div>
             </div>
         </div>
-    </body>
-</html>
+    </div>
+@endsection
+
+@section('script')
+    {!!Html::script('front-end/js/owl.carousel.min.js')!!}
+
+@endsection
