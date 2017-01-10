@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Albun;
 use App\Imagen;
 use App\Texto;
-use Faker\Provider\nl_NL\Text;
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class AdminController extends Controller
 {
@@ -75,4 +77,36 @@ class AdminController extends Controller
         $data['pdf'] = $pdf;
         return view('admin.servicios', $data);
     }
+
+    /**
+     * @return array
+     */
+    public function nuevoAdmin()
+    {
+        $users = User::where("rol","admin")->get();
+        $data["users"]=$users;
+        return view('superAdmin.addAdmin',$data);
+    }
+
+
+    /**
+     * @return string
+     */
+    public function addAdmin(Request $request)
+    {
+
+        $user = new User($request->all());
+        $user->password=bcrypt($request->telefono);
+        $user->avatar="avatar";
+        $user->rol="admin";
+        $user->save();
+
+        DB::table('password_resets')->insert(
+            ['email' => $request->email, 'token' => $request->_token, 'created_at' => Carbon::now()]
+        );
+
+
+        return "exito";
+    }
+
 }

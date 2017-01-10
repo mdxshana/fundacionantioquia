@@ -35,7 +35,7 @@
 <div class="container">
 
     {!!Form::open(['route' => 'login','class'=>'form-signin',"id"=>"login"])!!}
-        <div class="panel periodic-login" style="margin-top: 50%;" >
+        <div class="panel periodic-login" style="margin-top: 25%;" >
             {{--<span class="atomic-number">28</span>--}}
             <div class="panel-body text-center">
                 {{--<h4 class="atomic-symbol">Iniciar Sesión</h4>--}}
@@ -85,7 +85,7 @@
 
             </div>
             <div class="text-center" style="padding:5px;">
-                <a href="forgotpass.html">Forgot Password </a>
+                <a href="{{route("getEmail")}}">Forgot Password </a>
                 <a href="reg.html">| Signup</a>
             </div>
         </div>
