@@ -12,19 +12,20 @@
 
 
             <ul class="nav navbar-nav navbar-right user-nav">
-                <li class="user-name"><span>Akihiko Avaron</span></li>
+                <li class="user-name"><span>{{Auth::user()->nombre." ".Auth::user()->apellido}}</span></li>
                 <li class="dropdown avatar-dropdown">
-                    <img src="asset/img/avatar.jpg" class="img-circle avatar" alt="user name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"/>
+                    <img src="/img/{{Auth::user()->avatar}}.png" class="img-circle avatar" alt="user name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"/>
                     <ul class="dropdown-menu user-dropdown">
-                        <li><a href="#"><span class="fa fa-user"></span> My Profile</a></li>
-                        <li><a href="#"><span class="fa fa-calendar"></span> My Calendar</a></li>
+                        <li><a href="#"><span class="fa fa-user"></span> Mi perfil</a></li>
+                        {{--<li><a href="#"><span class="fa fa-calendar"></span> My Calendar</a></li>--}}
                         <li role="separator" class="divider"></li>
-                        <li class="more">
-                            <ul>
-                                <li><a href=""><span class="fa fa-cogs"></span></a></li>
-                                <li><a href=""><span class="fa fa-lock"></span></a></li>
-                                <li><a href=""><span class="fa fa-power-off "></span></a></li>
-                            </ul>
+                        <li class="more text-center">
+                            <a href="{{route("logout")}}"><span class="fa fa-sign-out fa-2x "></span></a>
+                            {{--<ul style="width: 100%;height: 40px;">--}}
+                                {{--<li><a href=""><span class="fa fa-cogs"></span></a></li>--}}
+                                {{--<li><a href=""><span class="fa fa-lock"></span></a></li>--}}
+                                {{--<li><a href=""><span class="fa fa-power-off "></span></a></li>--}}
+                            {{--</ul>--}}
                         </li>
                     </ul>
                 </li>

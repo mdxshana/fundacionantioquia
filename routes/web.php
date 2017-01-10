@@ -15,6 +15,15 @@ Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('login', ['as' =>'login', 'uses' => 'Auth\LoginController@login']);
 Route::get('logout', ['as' => 'logout', 'uses' => 'Auth\LoginController@logout']);
 
+Route::get('password/email', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('getEmail');
+Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('postEmail');
+
+
+Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('showResetForm');
+Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('reset');
+
+
+
 
 
 Route::get('home', function(){return view('layouts.back-end.layout');});
@@ -29,6 +38,8 @@ Route::group(['middleware' => ['auth', 'super']], function () {
     Route::get('superAdmin', function(){
         return "Hola super admin";
     })->name('superAdmin');
+    Route::get('admin/nuevoAdmin', 'adminController@nuevoAdmin')->name('nuevoAdmin');
+    Route::post('addAdmin', 'adminController@addAdmin')->name('addAdmin');
 
 });
 
