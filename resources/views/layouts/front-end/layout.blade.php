@@ -4,7 +4,7 @@
 <head>
 
   <!-- Basic -->
-  <title>Margo | File not Found</title>
+  {{--<title>Margo | File not Found</title>--}}
 
   <!-- Define Charset -->
   <meta charset="utf-8">

@@ -67,4 +67,12 @@ class AdminController extends Controller
         }
         return 'exito';
     }
+
+    public function editServicios()
+    {
+        $pdf = Texto::where('titulo', '=', 'pdf')->first();
+
+        $data['pdf'] = $pdf;
+        return view('admin.servicios', $data);
+    }
 }

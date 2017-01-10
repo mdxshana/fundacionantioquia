@@ -16,12 +16,13 @@ Route::post('login', ['as' =>'login', 'uses' => 'Auth\LoginController@login']);
 Route::get('logout', ['as' => 'logout', 'uses' => 'Auth\LoginController@logout']);
 
 
+
 Route::get('home', function(){return view('layouts.back-end.layout');});
 
 Route::get('/', 'UsuarioController@home');
 
 
-Route::post('admin/subirimagen', 'AdminController@subirImagen')->name('subirImagen');
+Route::get('admin/pdf', 'UsuarioController@getPDF')->name('getPDF');
 
 Route::group(['middleware' => ['auth', 'super']], function () {
 
@@ -39,6 +40,7 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
 
     Route::post('admin/editarTextos', 'AdminController@editTexto')->name('editTexto');
 
+    Route::get('admin/servicios', 'AdminController@editServicios')->name('editServicios');
 });
 
 Route::get('contacto', 'UsuarioController@contacto')->name('contacto');
