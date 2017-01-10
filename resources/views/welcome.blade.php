@@ -1,6 +1,45 @@
 @extends('layouts.front-end.layout')
 
 @section('style')
+    <title>Fundación Antioquía</title>
+    <style>
+        #content{
+            padding: 0;
+        }
+        @media (max-width: 450px) {
+            .carousel-inner>.item>img {
+                height: 300px;!important;
+            }
+        }
+        @media (min-width:451px) and (max-width: 800px){
+            .carousel-inner>.item>img {
+                height: 400px;!important;
+            }
+        }
+        @media (min-width:801px) and (max-width: 991px){
+            .carousel-inner>.item>img {
+                height: 450px;!important;
+            }
+        }
+        @media (min-width:992px) and (max-width: 1199px){
+            .carousel-inner>.item>img {
+                height: 500px;!important;
+            }
+        }
+        @media (min-width: 1200px){
+            .carousel-inner>.item>img {
+                height: 600px;!important;
+            }
+        }
+        p{
+            font-size: 16px;
+            color: #101010;
+            line-height: 25px;
+        }
+        .big-title h1 strong{
+            font-weight: 700;!important;
+        }
+    </style>
 @endsection
 
 
@@ -22,71 +61,21 @@
             <div class="carousel-inner">
                 @foreach($galeria as $clave => $foto)
                     <div class="item {{($clave==0)?'active':''}}">
-                        <img class="img-responsive" src="images/{{$foto}}" alt="slider" style="max-height: 500px; min-height: 200px">
-                        <div class="slider-content">
-                            <div class="col-md-12 text-center">
-                                <h2 class="animated2">
-                                    <span>Welcome to <strong>Margo</strong></span>
-                                </h2>
-                                <h3 class="animated3">
-                                    <span>The ultimate aim of your business</span>
-                                </h3>
-                                <p class="animated4"><a href="#" class="slider btn btn-system btn-large">Check Now</a>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-
-                {{--<div class="item active">--}}
-                    {{--<img class="img-responsive" src="images/slider/bg1.jpg" alt="slider">--}}
-                    {{--<div class="slider-content">--}}
-                        {{--<div class="col-md-12 text-center">--}}
-                            {{--<h2 class="animated2">--}}
-                                {{--<span>Welcome to <strong>Margo</strong></span>--}}
-                            {{--</h2>--}}
-                            {{--<h3 class="animated3">--}}
-                                {{--<span>The ultimate aim of your business</span>--}}
-                            {{--</h3>--}}
-                            {{--<p class="animated4"><a href="#" class="slider btn btn-system btn-large">Check Now</a>--}}
-                            {{--</p>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-                {{--</div>--}}
-                {{--<!--/ Carousel item end -->--}}
-                {{--<div class="item">--}}
-                    {{--<img class="img-responsive" src="images/slider/bg2.jpg" alt="slider">--}}
-                    {{--<div class="slider-content">--}}
-                        {{--<div class="col-md-12 text-center">--}}
-                            {{--<h2 class="animated4">--}}
-                                {{--<span><strong>Margo</strong> for the highest</span>--}}
-                            {{--</h2>--}}
-                            {{--<h3 class="animated5">--}}
-                                {{--<span>The Key of your Success</span>--}}
-                            {{--</h3>--}}
-                            {{--<p class="animated6"><a href="#" class="slider btn btn-system btn-large">Buy Now</a>--}}
-                            {{--</p>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-                {{--</div>--}}
-                {{--<!--/ Carousel item end -->--}}
-                {{--<div class="item">--}}
-                    {{--<img class="img-responsive" src="images/slider/bg3.jpg" alt="slider">--}}
-                    {{--<div class="slider-content">--}}
-                        {{--<div class="col-md-12 text-center">--}}
-                            {{--<h2 class="animated7 white">--}}
-                                {{--<span>The way of <strong>Success</strong></span>--}}
-                            {{--</h2>--}}
-                            {{--<h3 class="animated8 white">--}}
-                                {{--<span>Why you are waiting</span>--}}
-                            {{--</h3>--}}
-                            {{--<div class="">--}}
-                                {{--<a class="animated4 slider btn btn-system btn-large btn-min-block" href="#">Get Now</a><a class="animated4 slider btn btn-default btn-min-block" href="#">Live Demo</a>--}}
+                        <img class="fotoSlider" src="images/{{$foto}}" alt="slider" style="max-height: 600px; min-height: 200px">
+                        {{--<div class="slider-content">--}}
+                            {{--<div class="col-md-12 text-center">--}}
+                                {{--<h2 class="animated2">--}}
+                                    {{--<span>Welcome to <strong>Margo</strong></span>--}}
+                                {{--</h2>--}}
+                                {{--<h3 class="animated3">--}}
+                                    {{--<span>The ultimate aim of your business</span>--}}
+                                {{--</h3>--}}
+                                {{--<p class="animated4"><a href="#" class="slider btn btn-system btn-large">Check Now</a>--}}
+                                {{--</p>--}}
                             {{--</div>--}}
                         {{--</div>--}}
-                    {{--</div>--}}
-                {{--</div>--}}
-                <!--/ Carousel item end -->
+                    </div>
+                @endforeach
             </div>
             <!-- Carousel inner end-->
 
@@ -100,6 +89,28 @@
         </div>
         <!-- /carousel -->
     </section>
+
+    <div class=" section pricing-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- Start Big Heading -->
+                    <div class="big-title text-center">
+                        <h1> <strong>Filosofía</strong></h1>
+                    </div>
+                    <!-- End Big Heading -->
+
+                    <!-- Text -->
+
+                    <p class="text-justify">
+                        {!!$texto!!}
+                    </p>
+
+                    {{--<p class="text-center">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>--}}
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('script')

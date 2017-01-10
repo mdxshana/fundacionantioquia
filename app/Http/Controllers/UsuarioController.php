@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Albun;
 use App\Texto;
+use Barryvdh\DomPDF\PDF;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Routing\Route;
+use Illuminate\Support\Facades\App;
 
 class UsuarioController extends Controller
 {
@@ -37,6 +39,17 @@ class UsuarioController extends Controller
     public function contacto(Request $request)
     {
         return view("usuario.contacto");
+    }
+
+    public static function getPDF()
+    {
+
+
+        $pdf = Texto::where('titulo', '=', 'pdf')->first()->texto;
+        $data['pdf']=$pdf;
+
+        $pdf = \PDF::loadView('pdf.info', $data);
+        return $pdf->download('invoice.pdf');
     }
 
 

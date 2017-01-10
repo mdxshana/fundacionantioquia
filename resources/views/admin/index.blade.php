@@ -220,7 +220,7 @@
             });
         });
 
-        function  ajaxEliminarImagen(elemento) {
+        function ajaxEliminarImagen(elemento) {
             $.ajax({
                 type:"POST",
                 context: document.body,
