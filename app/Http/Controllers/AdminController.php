@@ -70,12 +70,17 @@ class AdminController extends Controller
         return 'exito';
     }
 
-    public function editServicios()
+    public function editRequisitos()
     {
         $pdf = Texto::where('titulo', '=', 'pdf')->first();
 
         $data['pdf'] = $pdf;
-        return view('admin.servicios', $data);
+        return view('admin.pdf', $data);
+    }
+
+    public function editServicios()
+    {
+        return view('admin.servicios');
     }
 
     /**
