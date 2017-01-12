@@ -63,9 +63,9 @@ class AdminController extends Controller
 
     public function editTexto(Request $request)
     {
-        foreach ($request->all() as $texto){
+        foreach ($request->all() as $texto) {
             $arrayTexto = json_decode($texto);
-            $texto = Texto::find($arrayTexto->id)->update(['texto'=>$arrayTexto->texto]);
+            $texto = Texto::find($arrayTexto->id)->update(['texto' => $arrayTexto->texto]);
         }
         return 'exito';
     }
@@ -83,9 +83,9 @@ class AdminController extends Controller
      */
     public function nuevoAdmin()
     {
-        $users = User::where("rol","admin")->get();
-        $data["users"]=$users;
-        return view('superAdmin.addAdmin',$data);
+        $users = User::where("rol", "admin")->get();
+        $data["users"] = $users;
+        return view('superAdmin.addAdmin', $data);
     }
 
 
@@ -94,19 +94,133 @@ class AdminController extends Controller
      */
     public function addAdmin(Request $request)
     {
+        DB::beginTransaction();
+        try {
+            $user = new User($request->all());
+            $user->password = bcrypt($request->telefono);
+            $user->avatar = "avatar.png";
+            $user->rol = "admin";
+            $user->save();
 
-        $user = new User($request->all());
-        $user->password=bcrypt($request->telefono);
-        $user->avatar="avatar";
-        $user->rol="admin";
-        $user->save();
+            DB::table('password_resets')->insert(
+                ['email' => $request->email, 'token' => $request->_token, 'created_at' => Carbon::now()]
+            );
+            DB::commit();
+            $data = ["estado" => true, "mensaje" => "exito"];
+        } catch (\Exception $e) {
+            DB::rollBack();
+            $data = ["estado" => false, "mensaje" => "error en la transaccion, intentar nuevamente." . $e->getMessage()];
+        }
+        return $data;
+    }
 
-        DB::table('password_resets')->insert(
-            ['email' => $request->email, 'token' => $request->_token, 'created_at' => Carbon::now()]
-        );
+    /**
+     * @return array
+     */
+    public function editAdmin(Request $request)
+    {
+        DB::beginTransaction();
+        try {
+
+            $user = User::find($request->id)->update($request->all());
+
+            DB::commit();
+            $data = ["estado" => true, "mensaje" => "exito"];
+        } catch (\Exception $e) {
+            DB::rollBack();
+            $data = ["estado" => false, "mensaje" => "error en la transaccion, intentar nuevamente." . $e->getMessage()];
+        }
+        return $data;
+    }
+
+    /**
+     * @return array
+     */
+    public function getAdmins()
+    {
+        $users = User::where("rol", "admin")->get();
+        $data["users"] = $users;
+        return view('superAdmin.admins', $data);
+    }
+
+    /**
+     * @return array
+     */
+    public function removeAdmins(Request $request)
+    {
+
+        DB::beginTransaction();
+        try {
+
+            User::find($request->id)->delete();
+
+            DB::commit();
+            $data = ["estado" => true, "mensaje" => "exito"];
+        } catch (\Exception $e) {
+            DB::rollBack();
+            $data = ["estado" => false, "mensaje" => "error en la transaccion, intentar nuevamente." . $e->getMessage()];
+        }
+        return $data;
+
+    }
 
 
-        return "exito";
+    /**
+     * @return array
+     */
+    public function perfil()
+    {
+        return view('admin.perfil');
+    }
+
+    /**
+     * @return string
+     */
+    public function cambiarPassword(Request $request)
+    {
+
+        $data["mensaje"] = "";
+
+        if (\Hash::check($request->passwordA, \Auth::user()->password)) {
+
+            if ($request->password == $request->passwordC) {
+                $user = User::find(\Auth::user()->id)->update(['password' => bcrypt($request->password)]);
+
+                $data["mensaje"] = "la contraseña fue cambiada exitosamente.";
+                $data["bandera"] = true;
+                return $data;
+            } else {
+                $data["mensaje"] = "las Contraseñas no coinciden";
+                $data["bandera"] = false;
+                return $data;
+            }
+
+        } else {
+            $data["mensaje"] = "la contraseña actual no coincide con nuestros registros";
+            $data["bandera"] = false;
+            return $data;
+        }
+
+    }
+
+    /**
+     * @return array
+     */
+    public function actualizarAvatar(Request $request)
+    {
+        DB::beginTransaction();
+        try {
+            $user = User::find($request->id);
+            $user->avatar=$request->avatar;
+            $user->save();
+
+            DB::commit();
+            $data = ["estado" => true, "mensaje" => "exito"];
+        } catch (\Exception $e) {
+            DB::rollBack();
+            $data = ["estado" => false, "mensaje" => "error en la transaccion, intentar nuevamente." . $e->getMessage()];
+        }
+        return $data;
     }
 
 }

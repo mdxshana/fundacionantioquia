@@ -40,10 +40,17 @@ Route::group(['middleware' => ['auth', 'super']], function () {
     })->name('superAdmin');
     Route::get('admin/nuevoAdmin', 'adminController@nuevoAdmin')->name('nuevoAdmin');
     Route::post('addAdmin', 'adminController@addAdmin')->name('addAdmin');
+    Route::post('editAdmin', 'adminController@editAdmin')->name('editAdmin');
+    Route::post('getAdmins', 'adminController@getAdmins')->name('getAdmins');
+    Route::post('removeAdmins', 'adminController@removeAdmins')->name('removeAdmins');
+    Route::post('cambiarPassword', 'adminController@cambiarPassword')->name('cambiarPassword');
+    Route::post('actualizarAvatar', 'adminController@actualizarAvatar')->name('actualizarAvatar');
 
 });
 
 Route::group(['middleware' => ['auth', 'admin']], function () {
+
+    Route::get('perfil', 'AdminController@perfil')->name('perfil');
 
     Route::get('admin/index', 'AdminController@editHome')->name('editHome');
     Route::post('admin/subirimagen', 'AdminController@subirImagen')->name('subirImagen');
@@ -52,6 +59,7 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::post('admin/editarTextos', 'AdminController@editTexto')->name('editTexto');
 
     Route::get('admin/servicios', 'AdminController@editServicios')->name('editServicios');
+
 });
 
 Route::get('contacto', 'UsuarioController@contacto')->name('contacto');
