@@ -49,9 +49,8 @@ class UsuarioController extends Controller
         $data['pdf']=$pdf;
 
         $pdf = \PDF::loadView('pdf.info', $data);
-        return $pdf->download('invoice.pdf');
+        return $pdf->download('requisitos.pdf');
     }
-
 
 
 

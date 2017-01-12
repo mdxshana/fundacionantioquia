@@ -31,7 +31,7 @@ Route::get('home', function(){return view('layouts.back-end.layout');});
 Route::get('/', 'UsuarioController@home');
 
 
-Route::get('admin/pdf', 'UsuarioController@getPDF')->name('getPDF');
+Route::get('/pdf', 'UsuarioController@getPDF')->name('getPDF');
 
 Route::group(['middleware' => ['auth', 'super']], function () {
 
@@ -57,6 +57,8 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::post('admin/borrarImagen', 'AdminController@deleteImage')->name('deleteImage');
 
     Route::post('admin/editarTextos', 'AdminController@editTexto')->name('editTexto');
+
+    Route::get('admin/requisitos', 'AdminController@editRequisitos')->name('editRequisitos');
 
     Route::get('admin/servicios', 'AdminController@editServicios')->name('editServicios');
 

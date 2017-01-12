@@ -5,6 +5,9 @@
         .mar-bot15{
             margin-bottom: 15px
         }
+        textarea{
+            resize: none;
+        }
     </style>
 @endsection
 
@@ -26,7 +29,7 @@
         <div class="panel-body">
             <div class="row mar-bot15">
                 <div class="col-md-12 article-v1-title titulos"><h3><b>PDF</b></h3></div>
-                <div class="col-md-12">Edita la información referente a los "<b>REQUISITOS DE DOTACIÓN PARA EL INGRESO A LA FUNDACION ANTIOQUÍA</b>"</div>
+                <div class="col-md-12">Edita la información que obtendran los usuarios al descargar el PDF de <b>requisitos de ingreso a la fundación</b>.</div>
             </div>
             <form id="requisitos">
                 <div class="row">
@@ -61,53 +64,18 @@
     <script charset="UTF-8">
         $(function() {
             CKEDITOR.replace( 'textoReq', {
-                // Define the toolbar: http://docs.ckeditor.com/#!/guide/dev_toolbar
-                // The full preset from CDN which we used as a base provides more features than we need.
-                // Also by default it comes with a 3-line toolbar. Here we put all buttons in a single row.
                 toolbar: [
+                    { name: 'basicstyles', items: [ 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript','Superscript'] },
                     { name: 'clipboard', items: [ 'Undo', 'Redo' ] },
-                    { name: 'styles', items: [ 'Format', 'Font', 'FontSize' ] },
-                    { name: 'basicstyles', items: [ 'Bold', 'Italic', 'Underline', 'Strike', 'RemoveFormat', 'CopyFormatting' ] },
+                    { name: 'styles', items: [ 'Font', 'FontSize' ] },
                     { name: 'colors', items: [ 'TextColor', 'BGColor' ] },
                     { name: 'align', items: [ 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock' ] },
-                    { name: 'paragraph', items: [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote' ] },
+                    { name: 'paragraph', items: [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent' ] },
                     { name: 'insert', items: [ 'Table' ] },
-                    { name: 'tools', items: [ 'Maximize' ] },
                     { name: 'editing', items: [ 'Scayt' ] }
                 ],
-                height: 500,
-                stylesSet: [
-                    /* Inline Styles */
-                    { name: 'Marker', element: 'span', attributes: { 'class': 'marker' } },
-                    { name: 'Cited Work', element: 'cite' },
-                    { name: 'Inline Quotation', element: 'q' },
-                    /* Object Styles */
-                    {
-                        name: 'Special Container',
-                        element: 'div',
-                        styles: {
-                            padding: '5px 10px',
-                            background: '#eee',
-                            border: '1px solid #ccc'
-                        }
-                    },
-                    {
-                        name: 'Compact table',
-                        element: 'table',
-                        attributes: {
-                            cellpadding: '5',
-                            cellspacing: '0',
-                            border: '1',
-                            bordercolor: '#ccc'
-                        },
-                        styles: {
-                            'border-collapse': 'collapse'
-                        }
-                    },
-                    { name: 'Borderless Table', element: 'table', styles: { 'border-style': 'hidden', 'background-color': '#E6E6FA' } },
-                    { name: 'Square Bulleted List', element: 'ul', styles: { 'list-style-type': 'square' } }
-                ]
-            } );
+                height: 500
+            }).config.resize_enabled = false;
         });
 
         $('#requisitos').on('submit', function (e) {

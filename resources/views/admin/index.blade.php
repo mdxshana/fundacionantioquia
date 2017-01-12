@@ -194,7 +194,33 @@
         var totalGaleria = 0;
         var imagesCargadas = 0;
         $(function(){
-            CKEDITOR.replace('infoAdicional', {removeButtons:'Image'});
+            CKEDITOR.replace('infoAdicional', {
+                toolbar: [
+                    { name: 'basicstyles', items: [ 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript','Superscript'] },
+                    { name: 'clipboard', items: [ 'Undo', 'Redo' ] },
+                    { name: 'styles', items: [ 'Font', 'FontSize' ] },
+                    { name: 'colors', items: [ 'TextColor', 'BGColor' ] },
+                    { name: 'align', items: [ 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock' ] },
+                    { name: 'paragraph', items: [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent' ] },
+                    { name: 'insert', items: [ 'Table' ] },
+                    { name: 'editing', items: [ 'Scayt' ] }
+                ],
+                height: 200
+            }).config.resize_enabled = false;
+            CKEDITOR.instances.infoAdicional.on('key',function(event){
+                var deleteKey = 46;
+                var backspaceKey = 8;
+                var keyCode = event.data.keyCode;
+                if (keyCode === deleteKey || keyCode === backspaceKey)
+                    return true;
+                else
+                {
+                    var textLimit = 300;
+                    var str = CKEDITOR.instances.infoAdicional.getData();
+                    if (str.length >= textLimit)
+                        return false;
+                }
+            });
 
             totalGaleria = "{!!count($galeria->getImagenes)!!}";
             validarUpload(totalGaleria);
