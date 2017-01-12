@@ -14,9 +14,9 @@
             <ul class="nav navbar-nav navbar-right user-nav">
                 <li class="user-name"><span>{{Auth::user()->nombre." ".Auth::user()->apellido}}</span></li>
                 <li class="dropdown avatar-dropdown">
-                    <img src="/img/{{Auth::user()->avatar}}.png" class="img-circle avatar" alt="user name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"/>
+                    <img src="/img/{{Auth::user()->avatar}}" class="img-circle avatar" alt="user name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"/>
                     <ul class="dropdown-menu user-dropdown">
-                        <li><a href="#"><span class="fa fa-user"></span> Mi perfil</a></li>
+                        <li><a href="{{route("perfil")}}"><span class="fa fa-user"></span> Mi perfil</a></li>
                         {{--<li><a href="#"><span class="fa fa-calendar"></span> My Calendar</a></li>--}}
                         <li role="separator" class="divider"></li>
                         <li class="more text-center">

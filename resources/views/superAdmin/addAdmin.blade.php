@@ -8,6 +8,12 @@
             padding: 10px;
             font-size: 18px;
         }
+        .btn-xs{
+            padding: 4px 10px;
+        }
+        .popover-content {
+            width: 130px;
+        }
     </style>
 @endsection
 
@@ -60,6 +66,12 @@
                             <label>Telefono</label>
                         </div>
                     </div>
+                    <div class="row">
+                        <div id="notifRegister" class="col-xs-12">
+
+
+                        </div>
+                    </div>
                     <div class="col-md-12">
                         <input class="submit btn btn-danger" type="submit" value="Registrar">
                     </div>
@@ -74,25 +86,23 @@
         <div class="col-md-12 panel-heading">
             <h4>Administradores Registrados</h4>
         </div>
-        <div class="col-md-12 panel-body" style="padding-bottom:30px;">
+        <div id="admins" class="col-md-12 panel-body" style="padding-bottom:30px;">
 
             @foreach($users as $user)
                 <div class="col-sm-4 col-md-3 col-lg-2 product-grid">
                     <div class="thumbnail">
-                        {{--<div class="product-location">--}}
-                        {{--<span class="fa-map-marker fa"></span> Banyumas--}}
-                        {{--</div>--}}
                         <img src="/img/{{$user->avatar}}" alt="...">
                         <div class="caption">
                             <h4>{{$user->nombre." ".$user->apellido}}</h4>
                             <p><i class="fa fa-mobile fa-2x" aria-hidden="true"></i> {{$user->telefono}}</p>
 
-                            <button class=" btn btn-circle btn-gradient btn-primary editarUser" value="primary">
+                            <button class=" btn btn-circle btn-gradient btn-primary editarUser" value="primary" data-id="{{$user->id}}" data-nombre="{{$user->nombre}}" data-apellido="{{$user->apellido}}" data-telefono="{{$user->telefono}}" data-email="{{$user->email}}">
                                 <span class="fa fa-pencil-square-o"></span>
                             </button>
-                            <button class=" btn btn-circle btn-gradient btn-danger pull-right removeUser" value="primary">
+                            <button class=" btn btn-circle btn-gradient btn-danger pull-right removeUser" value="primary" aria-hidden='true' data-id="{{$user->id}}" data-toggle='confirmation' data-singleton="true" data-placement='top' title='Eliminar?' data-btn-ok-label="Si" data-btn-cancel-label="No">
                                 <span class="fa fa-trash"></span>
                             </button>
+
                         </div>
                     </div>
                 </div>
@@ -110,40 +120,46 @@
                 </div>
                 {!!Form::open(['id'=>'formEditarUser','class'=>'form-horizontal', 'autocomplete'=>'off'])!!}
                 <div class="modal-body">
-                    <div class="row">
-
+                    <div class="row" style="margin: 0 10px;">
+                        <input type="hidden" name="id" id="id" value="">
                         <div class="col-md-6">
-                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
-                                <input type="text" class="form-text" id="validate_firstname" name="nombre" required>
+                            <div class="form-group form-animate-text" style="margin-top:40px !important; margin-right: 3px;">
+                                <input type="text" class="form-text" id="editNombre" name="nombre" required>
                                 <span class="bar"></span>
                                 <label>Nombres</label>
                             </div>
 
-                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
-                                <input type="text" class="form-text" id="validate_lastname" name="apellido" required>
+                            <div class="form-group form-animate-text" style="margin-top:40px !important; margin-right: 3px;">
+                                <input type="text" class="form-text" id="editApellido" name="apellido" required>
                                 <span class="bar"></span>
                                 <label>Apellidos</label>
                             </div>
                         </div>
 
                         <div class="col-md-6">
-                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
-                                <input type="email" class="form-text" id="validate_email" name="email" required>
+                            <div class="form-group form-animate-text" style="margin-top:40px !important; margin-left: 3px;">
+                                <input type="email" class="form-text" id="editEmail" name="email" required>
                                 <span class="bar"></span>
                                 <label>Email</label>
                             </div>
-                            <div class="form-group form-animate-text" style="margin-top:40px !important;">
-                                <input type="text" class="form-text" id="telefono" name="telefono" required>
+                            <div class="form-group form-animate-text" style="margin-top:40px !important; margin-left: 3px;">
+                                <input type="text" class="form-text" id="editTelefono" name="telefono" required>
                                 <span class="bar"></span>
                                 <label>Telefono</label>
                             </div>
                         </div>
 
                     </div>
+                    <div class="row">
+                        <div id="notifEdit" class="col-xs-12">
+
+
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                    {!! Form::submit('Guardar Información',['class'=>'btn btn-primary']) !!}
+                    {!! Form::submit('Guardar Cambios',['class'=>'btn btn-primary']) !!}
                 </div>
                 {!!Form::close()!!}
             </div><!-- /.modal-content -->
@@ -152,48 +168,125 @@
 @endsection
 
 @section('script')
-
+    {!!Html::script('plugins/bootstrapConfirmation/bootstrap-confirmation.min.js')!!}
     <script>
         $(function () {
-            var $formAddAdmin = $("#signupForm");
-            $formAddAdmin.submit(function (e) {
+            $(".removeUser").each(function(){
+                $(this).confirmation({
+                    onConfirm: function () {
+                        removeUser($(this).data("id"));
+                    }
+                });
+            });
+            var formAddAdmin = $("#signupForm");
+            formAddAdmin.submit(function (e) {
                 e.preventDefault();
                 $.ajax({
                     type: "POST",
                     context: document.body,
                     url: '{{route('addAdmin')}}',
-                    data: $formAddAdmin.serialize(),
+                    data: formAddAdmin.serialize(),
                     success: function (data) {
-                        if (data == "exito")
-                            $("#notif").html('<strong>Correcto!</strong> La informacion se ha actualizado exitosamente.').removeClass("hidden").addClass("alert-success").removeClass("alert-danger");
-                        else
-                            $("#notif").html('<strong>Correo no actualizado!</strong> <p>El correo electrónico ya esta en uso por otro usuario.</p>').removeClass("hidden").addClass("alert-danger").removeClass("alert-success");
+                        formAddAdmin.reset();
+                        var html = '<div class="alert alert-success alert-dismissable">'+
+                            '<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>'+
+                            '<strong>Perfecto!</strong> Un nuevo administrador en el sistema.'+
+                            '</div>';
+
+                        $("#notifRegister").html(html);
+                        llenarAdmins();
+                        setTimeout(function(){
+                            $("#notifRegister").html("");
+                        }, 2000);
                     },
                     error: function (data) {
-                        var respuesta =JSON.parse(data.responseText);
-                        var arr = Object.keys(respuesta).map(function(k) { return respuesta[k] });
-                        var error='<ul class="no-padding"><p>Por favor corregir los siguientes errores:</p>';
-                        for (var i=0; i<arr.length; i++)
-                            error += "<li>"+arr[i][0]+"</li>";
-                        error += "</ul>";
-                        $("#notif").html(error).removeClass("hidden").addClass("alert-danger").removeClass("alert-success");
+
                     }
                 });
-
-
-
             });
 
-            $(function () {
-                $(".editarUser").click(function () {
-                    console.log("click");
-                    $('#modalEditUser').modal('show');
+            var formEditUser = $("#formEditarUser");
+            formEditUser.submit(function (e) {
+                e.preventDefault();
+                $.ajax({
+                    type: "POST",
+                    context: document.body,
+                    url: '{{route('editAdmin')}}',
+                    data: formEditUser.serialize(),
+                    success: function (data) {
+                            if(data.estado){
+
+                                var html = '<div class="alert alert-success alert-dismissable">'+
+                                    '<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>'+
+                                    '<strong>Perfecto!</strong> Los cambios fueron guardados satisfactoriamente.'+
+                                    '</div>';
+
+                                $("#notifEdit").html(html);
+
+                                llenarAdmins();
+                                setTimeout(function(){
+                                    $('#modalEditUser').modal('hide');
+                                    $("#notifEdit").html("");
+                                }, 2000);
+
+                            }
+                        },
+                    error: function (data) {
+                        var html = '<div class="alert alert-success alert-dismissable">'+
+                            '<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>'+
+                            '<strong>Error!</strong>'+data.mensaje+
+                            '</div>';
+
+                        $("#notifEdit").html(html);
+                    }
                 });
             });
 
-
-
         });
+
+        $("#admins").on("click",".editarUser",function () {
+            $("#editNombre").val($(this).data("nombre"));
+            $("#editApellido").val($(this).data("apellido"));
+            $("#editEmail").val($(this).data("email"));
+            $("#editTelefono").val($(this).data("telefono"));
+            $("#id").val($(this).data("id"));
+            $('#modalEditUser').modal('show');
+        });
+
+        function llenarAdmins() {
+            $.ajax({
+                type: "POST",
+                context: document.body,
+                url: '{{route('getAdmins')}}',
+                data: [],
+                success: function (data) {
+                    $("#admins").html(data);
+                    $(".removeUser").each(function(){
+                        $(this).confirmation({
+                            onConfirm: function () {
+                                removeUser($(this).data("id"));
+                            }
+                        });
+                    });
+                },
+                error: function (data) {
+                }
+            });
+        }
+
+        function removeUser(id) {
+            $.ajax({
+                type: "POST",
+                context: document.body,
+                url: '{{route('removeAdmins')}}',
+                data: {"id":id},
+                success: function (data) {
+                    llenarAdmins();
+                },
+                error: function (data) {
+                }
+            });
+        }
 
     </script>
 
