@@ -331,4 +331,11 @@ class AdminController extends Controller
         return $this->validatesRequestErrorBag;
     }
 
+    /**
+     * @return array
+     */
+    public function somos()
+    {
+        return view('admin.somos');
+    }
 }

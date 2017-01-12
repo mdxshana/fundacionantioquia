@@ -45,6 +45,7 @@ Route::group(['middleware' => ['auth', 'super']], function () {
     Route::post('removeAdmins', 'adminController@removeAdmins')->name('removeAdmins');
     Route::post('cambiarPassword', 'adminController@cambiarPassword')->name('cambiarPassword');
     Route::post('actualizarAvatar', 'adminController@actualizarAvatar')->name('actualizarAvatar');
+    Route::get('admin/somos', 'adminController@somos')->name('somos');
 
 });
 
