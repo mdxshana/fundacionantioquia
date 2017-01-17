@@ -46,10 +46,10 @@ class UsuarioController extends Controller
         return view("welcome", $data);
     }
 
-    /**@param Request $request
+    /**
      * @return array
      */
-    public function contacto(Request $request)
+    public function contacto()
     {
         return view("usuario.contacto");
     }
@@ -79,11 +79,36 @@ class UsuarioController extends Controller
         foreach ($servicios as $servicio) {
             $arrayServ[]=$servicio;
         }
-
+        
         $data['servicio'] = $servicios[array_rand($arrayServ, 1)];
 
         return view('usuario.servicios', $data);
     }
+    
+    /**
+     * @return array
+     */
+    public function somos()
+    {
+
+        $textos = Texto::whereIn("titulo",["somos","vision","mision"])->get();
+        $data = array();
+
+        $images = Servicio::whereIn("nombre",["servicio","somos"])->get();
+
+
+
+        $data["somos"] = $textos->whereIn("titulo",["somos"])->first();
+        $data["vision"] = $textos->whereIn("titulo",["vision"])->first();
+        $data["mision"] = $textos->whereIn("titulo",["mision"])->first();
+
+        $data["images"]=$images->whereIn("nombre",["servicio"]);
+        $data["imageSomos"]=$images->whereIn("nombre",["somos"])->first();
+
+
+        return view("usuario.somos",$data);
+    }
+
 
     public function getGalerias()
     {

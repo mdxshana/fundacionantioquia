@@ -16,13 +16,13 @@
                 <a href="{{route("editHome")}}"><span class="fa fa-suitcase"></span>Servicios</a>
             </li>
             <li class="ripple">
-                <a href="{{route("editHome")}}"><span class="fa fa-users"></span>Nosotros</a>
+                <a href="{{route("nosotros")}}"><span class="fa fa-users"></span>Nosotros</a>
             </li>
             <li class="ripple">
                 <a href="{{route("editHome")}}"><span class="fa fa-picture-o"></span>Galeria</a>
             </li>
             <li class="ripple">
-                <a href="{{route("editHome")}}"><span class="fa fa-video-camera"></span>Videos</a>
+                <a href="{{route("videos")}}"><span class="fa fa-video-camera"></span>Videos</a>
             </li>
 
             {{--<li class="ripple">--}}
