@@ -7,7 +7,6 @@ use App\Imagen;
 use App\Servicio;
 use App\Texto;
 use App\User;
-use App\Servicio;
 use App\Video;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
