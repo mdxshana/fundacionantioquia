@@ -26,12 +26,12 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('reset
 
 
 
-Route::get('home', function(){return view('layouts.back-end.layout');});
-
+Route::get('home', function(){return view('layouts.front-end.layout');});
 Route::get('/', 'UsuarioController@home');
-
-
+Route::get('/servicios', 'UsuarioController@getServicios')->name('getServicios');
 Route::get('/pdf', 'UsuarioController@getPDF')->name('getPDF');
+Route::get('/galeria', 'UsuarioController@getGalerias')->name('getGalerias');
+
 
 Route::group(['middleware' => ['auth', 'super']], function () {
 
@@ -61,7 +61,11 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::get('admin/requisitos', 'AdminController@editRequisitos')->name('editRequisitos');
 
     Route::get('admin/servicios', 'AdminController@editServicios')->name('editServicios');
+    Route::post('admin/vinculo', 'AdminController@editVinculo')->name('editVinculo');
+    Route::post('admin/insertServicio', 'AdminController@insertServicio')->name('insertServicio');
+    Route::post('admin/deleteServicio', 'AdminController@deleteServicio')->name('deleteServicio');
 
+    
 });
 
 Route::get('contacto', 'UsuarioController@contacto')->name('contacto');

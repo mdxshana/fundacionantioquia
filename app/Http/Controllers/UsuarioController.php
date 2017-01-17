@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Albun;
+use App\Servicio;
 use App\Texto;
 use Barryvdh\DomPDF\PDF;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\App;
+use PhpParser\Node\Expr\Array_;
 
 class UsuarioController extends Controller
 {
@@ -29,6 +31,17 @@ class UsuarioController extends Controller
         $data['texto'] = $texto[0]->texto;
         $data['galeria'] = $arrayRutas;
 
+        $servicios = Servicio::where('nombre', '=', 'servicio')->get();
+        $arrayServ = array();
+        foreach ($servicios as $servicio) {
+            $arrayServ[$servicio->descripcion]=$servicio->imagen;
+        }
+
+        $servicio = array();
+        foreach (array_rand($arrayServ, 4) as $item){
+            $servicio[$item] = $arrayServ[$item];
+        };
+        $data['servicios'] = $servicio;
 
         return view("welcome", $data);
     }
@@ -43,8 +56,6 @@ class UsuarioController extends Controller
 
     public static function getPDF()
     {
-
-
         $pdf = Texto::where('titulo', '=', 'pdf')->first()->texto;
         $data['pdf']=$pdf;
 
@@ -52,6 +63,30 @@ class UsuarioController extends Controller
         return $pdf->download('requisitos.pdf');
     }
 
+    public function getServicios()
+    {
+        $textos = Texto::where('vista', '=', 'servicios')->get();
+        $data = array();
+        foreach ($textos as $texto){
+            $data[$texto->titulo]=$texto->texto;
+        }
 
+        $imagen = Servicio::where('nombre', '=', 'vinculacion')->first();
+        $data['imgVinculo'] = $imagen->imagen;
 
+        $servicios = Servicio::where('nombre', '=', 'servicio')->get();
+        $arrayServ = array();
+        foreach ($servicios as $servicio) {
+            $arrayServ[]=$servicio;
+        }
+
+        $data['servicio'] = $servicios[array_rand($arrayServ, 1)];
+
+        return view('usuario.servicios', $data);
+    }
+
+    public function getGalerias()
+    {
+        return view('usuario.galerias');
+    }
 }

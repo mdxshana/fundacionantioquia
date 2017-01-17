@@ -4,12 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Albun;
 use App\Imagen;
+use App\Servicio;
 use App\Texto;
 use App\User;
+use Illuminate\Cache\RedisTaggedCache;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use Symfony\Component\HttpKernel\Tests\DataCollector\DumpDataCollectorTest;
 
 class AdminController extends Controller
 {
@@ -19,6 +22,9 @@ class AdminController extends Controller
         $album = Albun::where('tipo', '=', 'S')->first();
         $album->getImagenes;
 
+        $servicios = Servicio::where('nombre', '=', 'servicio')->get();
+
+        $data['servicios'] = $servicios;
         $data['texto'] = $texto;
         $data['galeria'] = $album;
 //        dd($data);
@@ -65,7 +71,9 @@ class AdminController extends Controller
     {
         foreach ($request->all() as $texto) {
             $arrayTexto = json_decode($texto);
-            $texto = Texto::find($arrayTexto->id)->update(['texto' => $arrayTexto->texto]);
+            $rta = $this->updateTexto($arrayTexto);
+            if ($rta['estado'] == false)
+                return $rta['mensaje'];
         }
         return 'exito';
     }
@@ -73,14 +81,62 @@ class AdminController extends Controller
     public function editRequisitos()
     {
         $pdf = Texto::where('titulo', '=', 'pdf')->first();
-
         $data['pdf'] = $pdf;
         return view('admin.pdf', $data);
     }
 
     public function editServicios()
     {
-        return view('admin.servicios');
+        $textos = Texto::where('vista', '=', 'servicios')->get();
+        $data = array();
+        foreach ($textos as $texto){
+            $data[$texto->titulo]=$texto;
+        }
+
+        $imagen = Servicio::where('nombre', '=', 'vinculacion')->first();
+        $data['imagen'] = $imagen;
+
+        return view('admin.servicios', $data);
+    }
+
+    public function editVinculo(Request $request)
+    {
+        $file = $request->file('vinculo');
+        if ($file != null){
+            $name = time().$file->getClientOriginalName();
+            $arrayImgOld = json_decode($request->imgBorrar);
+            DB::beginTransaction();
+            try {
+                $imagen = Servicio::find($arrayImgOld->id)->update(['imagen' => $name]);
+                DB::commit();
+                $file->move('images', $name);
+                unlink("images/".utf8_decode($arrayImgOld->ruta));
+                $data = ["imagen" => true, "mensajeImg" => "exito", 'nueva' => $name];
+            } catch (\Exception $e) {
+                DB::rollBack();
+                $data = ["imagen" => false, "mensajeImg" => $e->getMessage()];
+            }
+        }
+
+        $rta = $this->updateTexto(json_decode($request->texto));
+        $data['texto'] = $rta['estado'];
+        $data['mensajeTexto'] = $rta['mensaje'];
+
+        return $data;
+    }
+
+    public function updateTexto($arrayTexto)
+    {
+        DB::beginTransaction();
+        try {
+            $texto = Texto::find($arrayTexto->id)->update(['texto' => $arrayTexto->texto]);
+            DB::commit();
+            $data = ["estado" => true, "mensaje" => "exito"];
+        } catch (\Exception $e) {
+            DB::rollBack();
+            $data = ["estado" => false, "mensaje" => "error:" . $e->getMessage()];
+        }
+        return $data;
     }
 
     /**
@@ -226,6 +282,53 @@ class AdminController extends Controller
             $data = ["estado" => false, "mensaje" => "error en la transaccion, intentar nuevamente." . $e->getMessage()];
         }
         return $data;
+    }
+
+    public function insertServicio(Request $request)
+    {
+        $file = $request->file('fotoServicio');
+        if ($file != null){
+            $name = time().$file->getClientOriginalName();
+            DB::beginTransaction();
+            try {
+                $servicio = new Servicio();
+                $servicio->nombre = 'servicio';
+                $servicio->descripcion = $request->titulo;
+                $servicio->imagen = $name;
+                $servicio->save();
+                DB::commit();
+                $file->move('images', $name);
+
+                $data = ["estado" => true, "mensaje" => "exito", 'nueva' => $name, 'id' => $servicio->id, 'titulo' => $servicio->descripcion];
+            } catch (\Exception $e) {
+                DB::rollBack();
+                $data = ["estado" => false, "mensaje" => $e->getMessage()];
+            }
+        }
+        else{
+            $data = ["estado" => false, "mensaje" => 'No se encontró una imagen válida para asociar al servicio.'];
+        }
+        return $data;
+    }
+
+    public function deleteServicio(Request $request)
+    {
+        DB::beginTransaction();
+        try{
+            Servicio::where('id', $request->id)->delete();
+            DB::commit();
+            unlink('images/' . utf8_decode($request->input('ruta')));
+            $data = ["estado" => true, "mensaje" => 'exito'];
+        } catch (\Exception $e) {
+            DB::rollBack();
+            $data = ["estado" => false, "mensaje" => $e->getMessage()];
+        }
+        return $data;
+    }
+
+    public function getValidatesRequestErrorBag()
+    {
+        return $this->validatesRequestErrorBag;
     }
 
 }
