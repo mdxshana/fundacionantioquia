@@ -7,7 +7,7 @@ use App\Imagen;
 use App\Servicio;
 use App\Texto;
 use App\User;
-use Illuminate\Cache\RedisTaggedCache;
+use App\Video;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
@@ -330,5 +330,112 @@ class AdminController extends Controller
     {
         return $this->validatesRequestErrorBag;
     }
+
+    /**
+     * @return array
+     */
+    public function somos()
+    {
+
+        $textos = Texto::whereIn("titulo",["somos","vision","mision"])->get();
+        $imageSomos = Servicio::where("nombre","somos")->first();
+        $data = array();
+        $data["somos"] = $textos->whereIn("titulo",["somos"])->first();
+        $data["vision"] = $textos->whereIn("titulo",["vision"])->first();
+        $data["mision"] = $textos->whereIn("titulo",["mision"])->first();
+        $data["imageSomos"]= $imageSomos;
+
+        return view('admin.somos',$data);
+    }
+
+    public function updateImagSomos(Request $request)
+    {
+        DB::beginTransaction();
+        try {
+        $imagen = Servicio::where("nombre","somos")->first();
+        unlink("images/".utf8_decode($imagen->imagen));
+
+        $file = $request->file('file');
+        $name = time().$file->getClientOriginalName();
+        $file->move('images', $name);
+
+        $imagen->imagen=$name;
+        $imagen->save();
+
+            DB::commit();
+            $data = ["estado" => true, "mensaje" => "exito","url"=>$name];
+        } catch (\Exception $e) {
+            DB::rollBack();
+            $data = ["estado" => false, "mensaje" => "error en la transaccion, intentar nuevamente." . $e->getMessage()];
+        }
+        return $data;
+    }
+
+    public function videos()
+    {
+
+        $videos = Video::all();
+
+        $data["videos"]=$videos;
+        return view('admin.videos',$data);
+    }
+
+
+    public function subirVideo(Request $request){
+
+        $videos = $request->file('inputGalery');
+
+        if ($videos != null) {
+            $videos = $videos[0];
+
+            $extension = explode(".", $videos->getClientOriginalName());
+            $cantidad = count($extension) - 1;
+            $extension = $extension[$cantidad];
+            $nombre = time() . $request->file_id . "." . $extension;
+
+            $videos->move('videos', utf8_decode($nombre));
+
+            $video = new Video();
+            $video->titulo="Sin Titulo";
+            $video->url = $nombre;
+            $video->descripcion= "...";
+            $video->save();
+
+            return json_encode(array('url' => $nombre, 'id' => $video->id,'titulo'=>$video->titulo,'descripcion'=>$video->descripcion));
+        } else
+            return json_encode(array('error' => 'Archivo no permitido'));
+
+
+    }
+
+    public function editInfoVideo(Request $request){
+        DB::beginTransaction();
+        try {
+        $video = Video::find($request->id)->update($request->all());
+            DB::commit();
+            $data = ["estado" => true, "mensaje" => "exito"];
+        } catch (\Exception $e) {
+            DB::rollBack();
+            $data = ["estado" => false, "mensaje" => "error en la transaccion, intentar nuevamente." . $e->getMessage()];
+        }
+        return $data;
+    }
+
+    public function removeVideo(Request $request){
+        DB::beginTransaction();
+        try {
+            $video = Video::find($request->id);
+            $url = $video->url;
+            $video->delete();
+                unlink('videos/' . utf8_decode($url));
+            
+            DB::commit();
+            $data = ["estado" => true, "mensaje" => "exito"];
+        } catch (\Exception $e) {
+            DB::rollBack();
+            $data = ["estado" => false, "mensaje" => "error en la transaccion, intentar nuevamente." . $e->getMessage()];
+        }
+        return $data;
+        }
 
 }

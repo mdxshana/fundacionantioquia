@@ -46,6 +46,8 @@ Route::group(['middleware' => ['auth', 'super']], function () {
     Route::post('cambiarPassword', 'adminController@cambiarPassword')->name('cambiarPassword');
     Route::post('actualizarAvatar', 'adminController@actualizarAvatar')->name('actualizarAvatar');
 
+
+
 });
 
 Route::group(['middleware' => ['auth', 'admin']], function () {
@@ -54,9 +56,11 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
 
     Route::get('admin/index', 'AdminController@editHome')->name('editHome');
     Route::post('admin/subirimagen', 'AdminController@subirImagen')->name('subirImagen');
+
     Route::post('admin/borrarImagen', 'AdminController@deleteImage')->name('deleteImage');
 
     Route::post('admin/editarTextos', 'AdminController@editTexto')->name('editTexto');
+    Route::post('updateImagSomos', 'AdminController@updateImagSomos')->name('updateImagSomos');
 
     Route::get('admin/requisitos', 'AdminController@editRequisitos')->name('editRequisitos');
 
@@ -65,10 +69,18 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::post('admin/insertServicio', 'AdminController@insertServicio')->name('insertServicio');
     Route::post('admin/deleteServicio', 'AdminController@deleteServicio')->name('deleteServicio');
 
+    Route::get('admin/nosotros', 'adminController@somos')->name('nosotros');
+    Route::get('admin/videos', 'adminController@videos')->name('videos');
+    Route::post('admin/subirvideo', 'AdminController@subirvideo')->name('subirvideo');
+    Route::post('admin/editInfoVideo', 'AdminController@editInfoVideo')->name('editInfoVideo');
+    Route::post('admin/removeVideo', 'AdminController@removeVideo')->name('removeVideo');
+
+
     
 });
 
 Route::get('contacto', 'UsuarioController@contacto')->name('contacto');
+Route::get('nosotros', 'UsuarioController@somos')->name('somos');
 Route::post('enviarMensaje', 'EmailController@enviarMensaje')->name('enviarMensaje');
 
 
