@@ -13,7 +13,7 @@
                 <a href="{{route("nuevoAdmin")}}"><span class="fa fa-user"></span>Adminstradores</a>
             </li>
             <li class="ripple">
-                <a href="{{route("editHome")}}"><span class="fa fa-suitcase"></span>Servicios</a>
+                <a href="{{route("editServicios")}}"><span class="fa fa-suitcase"></span>Servicios</a>
             </li>
             <li class="ripple">
                 <a href="{{route("nosotros")}}"><span class="fa fa-users"></span>Nosotros</a>
