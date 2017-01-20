@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Albun;
 use App\Servicio;
 use App\Texto;
+use App\Video;
 use Barryvdh\DomPDF\PDF;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -114,4 +115,13 @@ class UsuarioController extends Controller
     {
         return view('usuario.galerias');
     }
+
+    public function getVideos()
+    {
+        $videos = Video::all();
+
+        $data["videos"]=$videos;
+        return view('usuario.videos',$data);
+    }
+
 }

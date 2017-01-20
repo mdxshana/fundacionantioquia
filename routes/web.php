@@ -26,8 +26,8 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('reset
 
 
 
-Route::get('home', function(){return view('layouts.front-end.layout');});
-Route::get('/', 'UsuarioController@home');
+//Route::get('home', function(){return view('layouts.front-end.layout');});
+Route::get('/', 'UsuarioController@home')->name("home");
 Route::get('/servicios', 'UsuarioController@getServicios')->name('getServicios');
 Route::get('/pdf', 'UsuarioController@getPDF')->name('getPDF');
 Route::get('/galeria', 'UsuarioController@getGalerias')->name('getGalerias');
@@ -54,7 +54,7 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
 
     Route::get('perfil', 'AdminController@perfil')->name('perfil');
 
-    Route::get('admin/index', 'AdminController@editHome')->name('editHome');
+    Route::get('admin', 'AdminController@editHome')->name('editHome');
     Route::post('admin/subirimagen', 'AdminController@subirImagen')->name('subirImagen');
 
     Route::post('admin/borrarImagen', 'AdminController@deleteImage')->name('deleteImage');
@@ -83,6 +83,7 @@ Route::get('contacto', 'UsuarioController@contacto')->name('contacto');
 Route::get('nosotros', 'UsuarioController@somos')->name('somos');
 Route::post('enviarMensaje', 'EmailController@enviarMensaje')->name('enviarMensaje');
 
+Route::get('video', 'UsuarioController@getVideos')->name('getVideos');
 
 
 

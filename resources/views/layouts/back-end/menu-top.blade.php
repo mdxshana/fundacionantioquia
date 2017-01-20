@@ -7,7 +7,7 @@
                 <span class="bottom"></span>
             </div>
             <a href="index.html" class="navbar-brand">
-                <b>MIMIN</b>
+                <b>Fundacion Antioquía</b>
             </a>
 
 

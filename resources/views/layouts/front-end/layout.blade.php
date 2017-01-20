@@ -58,7 +58,11 @@
   {{--<link rel="stylesheet" type="text/css" href="css/colors/yellow.css" title="yellow" media="screen" />--}}
 
   @yield('style')
-
+  <style>
+    .twitter-widget ul li {
+       margin-bottom: 5px;
+    }
+  </style>
 </head>
 
 <body>
@@ -74,9 +78,9 @@
             <div class="col-md-6">
               <!-- Start Contact Info -->
               <ul class="contact-details">
-                <li><a href="#"><i class="fa fa-map-marker"></i> House-54/A, London, UK</a> </li>
-                <li><a href="#"><i class="fa fa-envelope-o"></i> info@yourcompany.com</a> </li>
-                <li><a href="#"><i class="fa fa-phone"></i> +12 345 678 000</a> </li>
+                <li><a href="#"><i class="fa fa-map-marker"></i> Km 12 Vía Acacías</a> </li>
+                <li><a href="#"><i class="fa fa-envelope-o"></i> concacto@fundacionantioquia.com</a> </li>
+                <li><a href="#"><i class="fa fa-phone"></i> 310 858 9044 - 318 313 8472</a> </li>
               </ul>
               <!-- End Contact Info -->
             </div>
@@ -120,17 +124,9 @@
         <div class="row footer-widgets">
 
           <!-- Start Subscribe & Social Links Widget -->
-          <div class="col-md-3">
-            <div class="footer-widget mail-subscribe-widget">
-              <h4>Get in touch<span class="head-line"></span></h4>
-              <p>Join our mailing list to stay up to date and get notices about our new releases!</p>
-              <form class="subscribe">
-                <input type="text" placeholder="mail@example.com">
-                <input type="submit" class="btn-system" value="Send">
-              </form>
-            </div>
+          <div class="col-md-3 col-md-offset-2">
             <div class="footer-widget social-widget">
-              <h4>Follow Us<span class="head-line"></span></h4>
+              <h4>Siguenos<span class="head-line"></span></h4>
               <ul class="social-icons">
                 <li>
                   <a class="facebook" href="#"><i class="fa fa-facebook"></i></a>
@@ -170,22 +166,13 @@
 
 
           <!-- Start Twitter Widget -->
-          <div class="col-md-3">
+          <div class="col-md-6 col-md-offset-1">
             <div class="footer-widget twitter-widget">
-              <h4>Twitter Feed<span class="head-line"></span></h4>
+              <h4>Contactenos<span class="head-line"></span></h4>
               <ul>
-                <li>
-                  <p><a href="#">@GrayGrids </a> Lorem ipsum dolor et, consectetur adipiscing eli.</p>
-                  <span>28 February 2014</span>
-                </li>
-                <li>
-                  <p><a href="#">@GrayGrids </a> Lorem ipsum dolor et, consectetur adipiscing eli.An Fusce eleifend aliquet nis application.</p>
-                  <span>26 February 2014</span>
-                </li>
-                <li>
-                  <p><a href="#">@GrayGrids </a> Lorem ipsum dolor et, consectetur adipiscing eli.</p>
-                  <span>28 February 2014</span>
-                </li>
+                <li><i class="fa fa-globe">  </i> <strong>Dirección:</strong> Km 12 Vía Acacías, Vereda la Union, Sector Naturalia, Finca El Paraiso</li>
+                <li><i class="fa fa-envelope-o"></i> <strong>Email:</strong> concacto@fundacionantioquia.com</li>
+                <li><i class="fa fa-mobile"></i> <strong>Phone:</strong> 311 480 8110 - 310 858 9044 - 318 313 8472</li>
               </ul>
             </div>
           </div>
@@ -194,9 +181,9 @@
 
 
           <!-- Start Flickr Widget -->
-          <div class="col-md-3">
-            <div class="footer-widget flickr-widget">
-              <h4>Flicker Feed<span class="head-line"></span></h4>
+          {{--<div class="col-md-3">--}}
+            {{--<div class="footer-widget flickr-widget">--}}
+              {{--<h4>Flicker Feed<span class="head-line"></span></h4>--}}
               {{--<ul class="flickr-list">--}}
                 {{--<li>--}}
                   {{--<a href="images/flickr-01.jpg" class="lightbox">--}}
@@ -244,24 +231,24 @@
                   {{--</a>--}}
                 {{--</li>--}}
               {{--</ul>--}}
-            </div>
-          </div>
+            {{--</div>--}}
+          {{--</div>--}}
           <!-- .col-md-3 -->
           <!-- End Flickr Widget -->
 
 
           <!-- Start Contact Widget -->
-          <div class="col-md-3">
-            <div class="footer-widget contact-widget">
-              <h4><img src="images/footer-margo.png" class="img-responsive" alt="Footer Logo" /></h4>
-              <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>
-              <ul>
-                <li><span>Phone Number:</span> +01 234 567 890</li>
-                <li><span>Email:</span> company@company.com</li>
-                <li><span>Website:</span> www.yourdomain.com</li>
-              </ul>
-            </div>
-          </div>
+          {{--<div class="col-md-3">--}}
+            {{--<div class="footer-widget contact-widget">--}}
+              {{--<h4><img src="images/footer-margo.png" class="img-responsive" alt="Footer Logo" /></h4>--}}
+              {{--<p>At verovident</p>--}}
+              {{--<ul>--}}
+                {{--<li><span>Phone Number:</span> +01 234 567 890</li>--}}
+                {{--<li><span>Email:</span> company@company.com</li>--}}
+                {{--<li><span>Website:</span> www.yourdomain.com</li>--}}
+              {{--</ul>--}}
+            {{--</div>--}}
+          {{--</div>--}}
           <!-- .col-md-3 -->
           <!-- End Contact Widget -->
 
@@ -272,16 +259,16 @@
         <!-- Start Copyright -->
         <div class="copyright-section">
           <div class="row">
-            <div class="col-md-6">
-              <p>&copy; 2014 Margo - All Rights Reserved</p>
+            <div class="col-md-12">
+              <p style="text-align: center">&copy; 2017 Ceindeted Llanos - Todos los derechos reservados</p>
             </div>
-            <div class="col-md-6">
-              <ul class="footer-nav">
-                <li><a href="#">Sitemap</a></li>
-                <li><a href="#">Privacy Policy</a></li>
-                <li><a href="#">Contact</a></li>
-              </ul>
-            </div>
+            {{--<div class="col-md-6">--}}
+              {{--<ul class="footer-nav">--}}
+                {{--<li><a href="#">Sitemap</a></li>--}}
+                {{--<li><a href="#">Privacy Policy</a></li>--}}
+                {{--<li><a href="#">Contact</a></li>--}}
+              {{--</ul>--}}
+            {{--</div>--}}
           </div>
         </div>
         <!-- End Copyright -->
@@ -353,6 +340,13 @@
 
   {!!Html::script('js/inicio.js')!!}
 @yield('script')
+
+  <script>
+    $(function () {
+        $(".navbar-brand").css("padding-top",0).css("padding-bottom",0);
+    });
+  </script>
+
 </body>
 
 </html>
