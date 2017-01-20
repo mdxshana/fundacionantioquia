@@ -309,7 +309,7 @@ p.quote{
     .form-signin .panel{background: #2196f3;color: #fff;padding: 10px;border:none !important;box-shadow: 0 7px 16px #0a86e9, 0 4px 5px #0a86e9;}
     .form-signin .panel-body{padding-bottom: 50px;padding-top: 30px;}
     .form-signin .atomic-number{font-size: 20px;}
-    .form-signin .atomic-symbol{font-size: 10em !important;font-weight: 500;padding-bottom: 20spx;}
+    .form-signin .atomic-symbol{font-size: 10em !important;font-weight: 500;padding-bottom: 20px;}
     .form-signin .element-name,.form-signin .atomic-mass{font-size: 18px;margin-top: -10px;font-weight: 600;line-height: 1.2;}
     .form-signin label{color:#fff !important;}
     .form-signin .bar:before,.form-signin .bar:after{background-color:#fff !important;}
@@ -384,7 +384,7 @@ p.quote{
    
     .search-v1 #search-v1-images .post { height: 100px; background: cyan; margin-bottom: 20px; }
     .search-v1 #search-v1-images .tall { height: 200px; }
-}
+
 /*end: search v1*/
 
 
@@ -593,7 +593,7 @@ p.quote{
 
 .form-control.android[type='text'],
 .form-control.android[type='password'] {
-  width: 100%%;
+  width: 100%;
   font-family: "Roboto", "Droid Sans", sans-serif;
   font-size: 16px;
   margin: 0;
@@ -1601,11 +1601,11 @@ ul li a:focus {
   .btn-flip {
     height: 50px !important;
     padding: 0px !important;
-    -webkit-perspective: 600;
-    -moz-perspective: 600;
-    -ms-perspective: 600;
-    -o-perspective: 600;
-    perspective: 600;
+    -webkit-perspective: 600px;
+    -moz-perspective: 600px;
+    -ms-perspective: 600px;
+    -o-perspective: 600px;
+    perspective: 600px;
     position: relative;
     width: 150px !important;
   }
@@ -1656,10 +1656,12 @@ ul li a:focus {
 
 
   .avatar {
+      cursor: pointer;
+      margin-right: 20px;
     height: 40px;
     width: 40px;
     border: 4px solid #108DB6 !important;
-    margin-top: 5px;
+    margin-top: 8px;
   }
 
   .panel-primary .panel-heading,
@@ -1790,7 +1792,7 @@ ul li a:focus {
     text-shadow: 0px 1px 5px #918C8C;
     padding: 15px;
     margin-left: 20px;
-    font-size: 2.3em;
+    font-size: 1.6em;
     color: #FFFFFF !important;
   }
 
@@ -1878,7 +1880,7 @@ ul li a:focus {
 
 .user-dropdown li a {
   color: #9E9E9E;
-  font-weight: 10;
+  font-weight: 600;
 }
 
 .user-dropdown:before {
@@ -1999,6 +2001,7 @@ ul li a:focus {
 
 #left-menu .sub-left-menu .active {
   border-left: 4px solid #C1B8B8;
+    background-color: #eff1f1;
 }
 
 #left-menu .sub-left-menu .active {
@@ -2556,9 +2559,6 @@ ul li a:focus {
   padding: 10px;
   overflow: hidden;
   display: -webkit-flex;
-  display: -moz-flex;
-  display: -ms-flex;
-  display: -o-flex;
   display: flex;
 }
 
@@ -2608,11 +2608,11 @@ ul li a:focus {
   border: 5px solid white;
   border-right-color: transparent;
   border-top-color: transparent;
-  -webkit-box-shadow: 1px 1px 2px rgba(black, 0.2);
-  -moz-box-shadow: 1px 1px 2px rgba(black, 0.2);
-  -ms-box-shadow: 1px 1px 2px rgba(black, 0.2);
-  -o-box-shadow: 1px 1px 2px rgba(black, 0.2);
-  box-shadow: 1px 1px 2px rgba(black, 0.2);
+  -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  -ms-box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  -o-box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 .msg_sent > time {
@@ -3018,11 +3018,11 @@ ul li a:focus {
   -ms-transition: height .25s ease, width .25s ease;
   -o-transition: height .25s ease, width .25s ease;
   transition: height .25s ease, width .25s ease;
-  -webkit-transform: transform: translate(-50%, -50%);
-  -moz-transform: transform: translate(-50%, -50%);
-  -ms-transform: transform: translate(-50%, -50%);
-  -o-transform: transform: translate(-50%, -50%);
-  transform: transform: translate(-50%, -50%);
+  -webkit-transform:  translate(-50%, -50%);
+  -moz-transform:  translate(-50%, -50%);
+  -ms-transform:  translate(-50%, -50%);
+  -o-transform:  translate(-50%, -50%);
+  transform:  translate(-50%, -50%);
   -webkit-transform: translate(-50%, -50%);
   -moz-transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
@@ -3154,7 +3154,7 @@ ul li a:focus {
   width: 2px;
   height: 10px;
   margin-top: 0px;
-  background: -webkit-radial-gradient(center, farthest-corner, #C4EDFF, #C4EDFF);
+/*  background: -webkit-radial-gradient(center, farthest-corner, #C4EDFF, #C4EDFF);
   background: -moz-radial-gradient(center, farthest-corner, #C4EDFF, #C4EDFF);
   background: -ms-radial-gradient(center, farthest-corner, #C4EDFF, #C4EDFF);
   background: -o-radial-gradient(center, farthest-corner, #C4EDFF, #C4EDFF);
@@ -3168,7 +3168,7 @@ ul li a:focus {
   background: -moz-radial-gradient(center, farthest-corner, #A4DDF5, #76CBF1);
   background: -ms-radial-gradient(center, farthest-corner, #A4DDF5, #76CBF1);
   background: -o-radial-gradient(center, farthest-corner, #A4DDF5, #76CBF1);
-  background: radial-gradient(center, farthest-corner, #A4DDF5, #76CBF1);
+  background: radial-gradient(center, farthest-corner, #A4DDF5, #76CBF1);*/
   position: absolute;
   -webkit-border-radius: 10px 10px 10px 10px / 30px 30px 10px 10px;
   -moz-border-radius: 10px 10px 10px 10px / 30px 30px 10px 10px;
@@ -4837,7 +4837,7 @@ ul li a:focus {
   padding: 10px;
   padding-top: 20px;
   padding-left: 20px;
-  border-top: 1px solid 1px solid #E7E7E7;
+  border-top: 1px solid #E7E7E7;
 }
 
 .mail-wrapper .mail-right .searchbox-v1 {
@@ -5116,11 +5116,11 @@ ul li a:focus {
   -ms-transition: -webkit-transform 0.2s ease-in;
   -o-transition: -webkit-transform 0.2s ease-in;
   transition: -webkit-transform 0.2s ease-in;
-  -webkit-transition: transform: 0.2s ease-in;
-  -moz-transition: transform: 0.2s ease-in;
-  -ms-transition: transform: 0.2s ease-in;
-  -o-transition: transform: 0.2s ease-in;
-  transition: transform: 0.2s ease-in;
+  -webkit-transition: 0.2s ease-in;
+  -moz-transition: 0.2s ease-in;
+  -ms-transition: 0.2s ease-in;
+  -o-transition: 0.2s ease-in;
+  transition: 0.2s ease-in;
 }
 
 .nav-tabs.nav-tabs-v1 li a:focus {
@@ -5646,7 +5646,7 @@ ul li a:focus {
 .sub-mimin-mobile-menu-list {
   display: none;
   padding: 0;
-  height: 300px;
+  /*height: 300px;*/
   font-weight: 100;
   overflow: auto;
   font-size: 2em;
@@ -6387,7 +6387,7 @@ ul li a:focus {
   .responsive-table td:before { content: attr(data-title); }
 
   .search-nav{
-    display: none !Im;
+    display: none !important;
   }
 
   #quote-carousel .carousel-indicators {
@@ -6484,5 +6484,8 @@ ul li a:focus {
   .search-nav{
     display: none;
   }
+}
 
+.mar-bot15{
+    margin-bottom: 15px
 }

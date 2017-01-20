@@ -6,6 +6,11 @@
         #content{
             padding: 0;
         }
+        .service{
+            height: 200px;
+        }
+
+
         @media (max-width: 450px) {
             .carousel-inner>.item>img {
                 height: 300px;!important;
@@ -20,15 +25,24 @@
             .carousel-inner>.item>img {
                 height: 450px;!important;
             }
+            .service{
+                width: 100%;
+            }
         }
         @media (min-width:992px) and (max-width: 1199px){
             .carousel-inner>.item>img {
                 height: 500px;!important;
             }
+            .service{
+                width: 100%;
+            }
         }
         @media (min-width: 1200px){
             .carousel-inner>.item>img {
                 height: 600px;!important;
+            }
+            .service{
+                width: 100%;
             }
         }
         p{
@@ -38,6 +52,9 @@
         }
         .big-title h1 strong{
             font-weight: 700;!important;
+        }
+        .member-photo{
+            cursor: pointer;
         }
     </style>
 @endsection
@@ -96,7 +113,7 @@
                 <div class="col-md-12">
                     <!-- Start Big Heading -->
                     <div class="big-title text-center">
-                        <h1> <strong>Filosofía</strong></h1>
+                        <h1 class="classic-title"> <span><strong>Filosofía</strong></span></h1>
                     </div>
                     <!-- End Big Heading -->
 
@@ -111,9 +128,42 @@
             </div>
         </div>
     </div>
+
+    <div class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="big-title text-center">
+                        <h1 class="classic-title"><span><strong>Servicios</strong></span></h1>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                @foreach($servicios as $clave => $servicio)
+                    <div class="col-md-3 col-sm-6 col-xs-12 servicio" data-animation="fadeIn" data-animation-delay="03">
+                        <div class="team-member modern">
+                            <!-- Memebr Photo, Name & Position -->
+                            <div class="member-photo text-center">
+                                <img alt="" src="/images/{{$servicio}}" class="service"/>
+                                <div class="member-name">{{$clave}}<span></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('script')
     {!!Html::script('front-end/js/owl.carousel.min.js')!!}
-
+    <script>
+        $(function(){
+            $(".member-photo").click(function(){
+                window.open('/servicios', '_blank');
+            });
+        });
+    </script>
 @endsection

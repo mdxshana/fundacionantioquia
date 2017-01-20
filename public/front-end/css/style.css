@@ -566,7 +566,7 @@ ul.social-list li:last-child a i {
 }
 .navbar {
 	margin-bottom: 0;
-	background: #fff;
+	background: #2f5529;;
 	border: none;
 	border-radius: 0;
     -webkit-border-radius: 0;
@@ -905,7 +905,7 @@ ul.social-list li:last-child a i {
 }
 
 #main-slide .carousel-control i{
-	background: rgba(0,0,0,.7);
+	background: rgb(47, 85, 41);;
 	color: #fff;
 	line-height: 36px;
 	font-size: 32px;
@@ -4095,9 +4095,9 @@ ul.post-meta li, ul.post-meta li a {
 /*------------------------------------------*/
 
 footer {
-	background-color: #222;
-    padding-top: 60px;
-	border-top: 4px solid #555;
+	background-color: #004a22;
+    padding-top: 20px;
+	border-top: 4px solid #395d33;
 	color: #ccc;
 }
 
@@ -4115,7 +4115,7 @@ footer a:hover {
 }
 
 .footer-widget {
-    margin-bottom: 45px;
+    margin-bottom: 20px;
 }
 
 .footer-widget h4 {
@@ -4135,7 +4135,7 @@ footer a:hover {
 	display: block;
 	width: 50px;
 	height: 3px;
-	background-color: #333;
+	background-color: #ffb8f4;
 	margin: 0;
 }
 
@@ -4354,7 +4354,7 @@ ul.footer-nav li a:hover {
     -moz-border-radius: 2px;
     -o-border-radius: 2px;
     text-align: center;
-    background-color: #444;
+    background-color: rgb(47, 85, 41);
     transition: all 0.2s ease-in-out;
     -moz-transition: all 0.2s ease-in-out;
     -webkit-transition: all 0.2s ease-in-out;
