@@ -21,10 +21,13 @@
                     <a href="{{route("home")}}">Inicio</a>
                 </li>
                 <li>
+                    <a href="{{route("somos")}}">Nosotros</a>
+                </li>
+                <li>
                     <a href="{{route("getServicios")}}">Servicios</a>
                 </li>
                 <li>
-                    <a href="{{route("getVideos")}}">Galeria</a>
+                    <a href="{{route("getGalerias")}}">Galeria</a>
                 </li>
                 <li>
                     <a href="{{route("getVideos")}}">Videos</a>
@@ -43,10 +46,13 @@
             <a href="{{route("home")}}">Inicio</a>
         </li>
         <li>
+            <a href="{{route("somos")}}">Nosotros</a>
+        </li>
+        <li>
             <a href="{{route("getServicios")}}">Servicios</a>
         </li>
         <li>
-            <a href="{{route("getVideos")}}">Galeria</a>
+            <a href="{{route("getGalerias")}}">Galeria</a>
         </li>
         <li>
             <a href="{{route("getVideos")}}">Videos</a>

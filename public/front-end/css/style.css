@@ -123,8 +123,9 @@ h6 {
 }
 
 p {
+	text-align: justify;
     color: #666;
-    font-size: 13px;
+    font-size: 15px;
     font-family: 'Open Sans', sans-serif;
     line-height: 22px;
     margin: 0;
