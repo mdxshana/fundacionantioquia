@@ -40,18 +40,18 @@
             cursor: pointer;
             padding: 5px;
             padding-top: 8px;
-            -webkit-transition: all 1s ease;
-            -moz-transition: all 1s ease;
-            -ms-transition: all 1s ease;
-            transition: all 1s ease;
+            -webkit-transition:all .9s ease; /* Safari y Chrome */
+            -moz-transition:all .9s ease; /* Firefox */
+            -o-transition:all .9s ease; /* IE 9 */
+            -ms-transition:all .9s ease;
         }
         .pdf:hover{
             color: #000;
-            -webkit-box-shadow:0 1px 5px 0 #000;
-            -moz-box-shadow:0 1px 5px 0 #000;
-            box-shadow:0 1px 5px 0 #000;
-            border-radius: 5px;
-            margin-top: 10px;
+            -webkit-transform:scale(1.25);
+            -moz-transform:scale(1.25);
+            -ms-transform:scale(1.25);
+            -o-transform:scale(1.25);
+            transform:scale(1.25);
         }
     </style>
 @endsection
