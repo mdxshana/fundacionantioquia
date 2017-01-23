@@ -34,37 +34,71 @@ class AdminController extends Controller
     public function subirImagen(Request $request)
     {
         $fotos = $request->file('inputGalery');
-
         if ($fotos != null) {
-            $fotos = $fotos[0];
+            DB::beginTransaction();
+            try{
+                $fotos = $fotos[0];
+                $extension = explode(".", $fotos->getClientOriginalName());
+                $cantidad = count($extension) - 1;
+                $extension = $extension[$cantidad];
+                $nombre = time() . $request->file_id . "." . $extension;
 
-            $extension = explode(".", $fotos->getClientOriginalName());
-            $cantidad = count($extension) - 1;
-            $extension = $extension[$cantidad];
-            $nombre = time() . $request->file_id . "." . $extension;
+                $imagen = new Imagen();
+                $imagen->albun_id = $request->album;
+                $imagen->url = $nombre;
+                $imagen->save();
+                $fotos->move('images', utf8_decode($nombre));
 
-            $fotos->move('images', utf8_decode($nombre));
+                $album = Albun::find($request->album);
+                if($album->tipo == 'A'){
+                    if($extension == 'jpg') {
+                        $estampa = imagecreatefromjpeg("images/" . utf8_decode($nombre));
+                    }
+                    else {
+                        $estampa = imagecreatefrompng("images/" . utf8_decode($nombre));
+                    }
 
-            $imagen = new Imagen();
-            $imagen->albun_id = $request->album;
-            $imagen->url = $nombre;
-            $imagen->save();
+                    list($ancho, $alto) = getimagesize("images/" . utf8_decode($nombre));
 
-            return json_encode(array('ruta' => $nombre, 'id' => $imagen->id));
+                    $temp = imagecreatetruecolor(480,480);
+                    imagecopyresampled($temp, $estampa, 0, 0, 0, 0, 480, 480, $ancho, $alto);
+                    imagedestroy($estampa);
+
+                    if($extension == 'jpg') {
+                        imagejpeg($temp, 'images/thumbs/'.$nombre, 95);
+                    }
+                    else {
+                        imagepng($temp, 'images/thumbs/'.$nombre);
+                    }
+                }
+                DB::commit();
+                return json_encode(array('ruta' => $nombre, 'id' => $imagen->id));
+            }catch(\Exception $e){
+                DB::rollBack();
+                return json_encode(array('error' => "No se pudo eliminar la imagen, " . $e->getMessage()));
+            }
         } else
             return json_encode(array('error' => 'Archivo no permitido'));
     }
 
     public function deleteImage(Request $request)
     {
-        $affectedRows = Imagen::where('id', $request->input('id'))->delete();
-//        Galeria::destroy($request->input('id'));
-        if ($affectedRows > 0) {
+        DB::beginTransaction();
+        try {
+            $imagen = Imagen::find($request->input('id'));
+            $imagen->getAlbum;
             unlink('images/' . utf8_decode($request->input('ruta')));
-            return "exito";
-        } else {
-            return "error";
+            if($imagen->getAlbum->tipo == 'A')
+                unlink('images/thumbs/' . utf8_decode($request->input('ruta')));
+            $imagen->delete();
+            DB::commit();
+            $data = ["estado" => true, "mensaje" => "exito"];
+        } catch (\Exception $e) {
+            DB::rollBack();
+            $data = ["estado" => false, "mensaje" => "No se pudo eliminar la imagen, " . $e->getMessage()];
         }
+
+        return $data;
     }
 
     public function editTexto(Request $request)
@@ -326,9 +360,42 @@ class AdminController extends Controller
         return $data;
     }
 
-    public function getValidatesRequestErrorBag()
+    public function editGalerias()
     {
-        return $this->validatesRequestErrorBag;
+        $albums = Albun::where('tipo', '=', 'A')->get();
+        foreach ($albums as $album){
+            $album->cantImgs = count($album->getImagenes);
+            $album->portada = $album->getImagenes->first();
+        }
+//        dd($albums);
+        $data['albums'] = $albums;
+        return view('admin.galerias', $data);
+    }
+
+    public function editAlbum($id)
+    {
+        $album = Albun::find($id);
+        if($album == null || $album->tipo != 'A')
+            return redirect()->back();
+        else{
+            $album->getImagenes;
+            $data['album'] = $album;
+            return view('admin.album', $data);
+        }
+    }
+
+    public function deleteAlbum(Request $request)
+    {
+        DB::beginTransaction();
+        try {
+            Albun::find($request->input('id'))->delete();
+            DB::commit();
+            $data = ["estado" => true, "mensaje" => "exito"];
+        } catch (\Exception $e) {
+            DB::rollBack();
+            $data = ["estado" => false, "mensaje" => "No se pudo eliminar el álbum imagen, " . $e->getMessage()];
+        }
+        return $data;
     }
 
     /**
@@ -438,4 +505,34 @@ class AdminController extends Controller
         return $data;
         }
 
+    public function subirAlbum(Request $request)
+    {
+        DB::beginTransaction();
+        try {
+            $album = new Albun($request->all());
+            $album->tipo = 'A';
+            $album->save();
+            DB::commit();
+            return redirect()->to(route('editAlbum', $album->id));
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->to(route('editGalerias'));
+        }
+
+    }
+
+    public function updateAlbum(Request $request)
+    {
+        DB::beginTransaction();
+        try {
+            $album = Albun::find($request->id);
+            $album->nombre = $request->nombre;
+            $album->save();
+            DB::commit();
+            return "exito";
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return "No se pudo actualizar el nombre del álbum, " . $e->getMessage();
+        }
+    }
 }

@@ -113,7 +113,27 @@ class UsuarioController extends Controller
 
     public function getGalerias()
     {
-        return view('usuario.galerias');
+        $albums = Albun::where('tipo', '=', 'A')->get();
+        foreach ($albums as $album){
+            $album->cantImgs = count($album->getImagenes);
+            $album->portada = $album->getImagenes->first();
+        }
+        $data['albums'] = $albums;
+//        dd($data);
+        return view('usuario.galerias', $data);
+    }
+
+    public function getImgsAlbum(Request $request)
+    {
+        $album = Albun::find($request->id);
+        if($album != null){
+            $imagenes = $album->getImagenes;
+            $data['imagenes'] = $imagenes;
+//            dd($data);
+            return $data;
+        }
+        else
+            return "Error de conexion.";
     }
 
     public function getVideos()
