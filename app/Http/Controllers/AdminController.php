@@ -410,12 +410,14 @@ class AdminController extends Controller
     public function somos()
     {
 
-        $textos = Texto::whereIn("titulo",["somos","vision","mision"])->get();
+        $textos = Texto::whereIn("titulo",["somos","vision","mision","modelo"])->get();
         $imageSomos = Servicio::where("nombre","somos")->first();
         $data = array();
         $data["somos"] = $textos->whereIn("titulo",["somos"])->first();
         $data["vision"] = $textos->whereIn("titulo",["vision"])->first();
         $data["mision"] = $textos->whereIn("titulo",["mision"])->first();
+        $data["modelo"] = $textos->whereIn("titulo",["modelo"])->first();
+
         $data["imageSomos"]= $imageSomos;
 
         return view('admin.somos',$data);

@@ -344,6 +344,13 @@
   <script>
     $(function () {
         $(".navbar-brand").css("padding-top",0).css("padding-bottom",0);
+        var CURRENT_URL = window.location.href;
+        // console.log(CURRENT_URL);
+        var contador = 1;
+        if(CURRENT_URL.split("/")[3]=="")
+            CURRENT_URL = CURRENT_URL.substring(0,CURRENT_URL.length-1);
+
+        $(".navbar-right").find('a[href="' + CURRENT_URL + '"]').addClass("active");
     });
   </script>
 

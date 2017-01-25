@@ -92,7 +92,7 @@ class UsuarioController extends Controller
     public function somos()
     {
 
-        $textos = Texto::whereIn("titulo",["somos","vision","mision"])->get();
+        $textos = Texto::whereIn("titulo",["somos","vision","mision","modelo"])->get();
         $data = array();
 
         $images = Servicio::whereIn("nombre",["servicio","somos"])->get();
@@ -102,6 +102,7 @@ class UsuarioController extends Controller
         $data["somos"] = $textos->whereIn("titulo",["somos"])->first();
         $data["vision"] = $textos->whereIn("titulo",["vision"])->first();
         $data["mision"] = $textos->whereIn("titulo",["mision"])->first();
+        $data["modelo"] = $textos->whereIn("titulo",["modelo"])->first();
 
         $data["images"]=$images->whereIn("nombre",["servicio"]);
         $data["imageSomos"]=$images->whereIn("nombre",["somos"])->first();

@@ -80,6 +80,13 @@
                     {!! $vision->texto !!}
                 </div>
 
+                <div class="col-md-12" style="margin-top: 30px;">
+                    <div class="big-title text-center">
+                        <h3 class="classic-title"> <span><strong>Modelo de atención "TEO-TERAPÉUTICO"</strong></span></h3>
+                    </div>
+                    {!! $modelo->texto !!}
+                </div>
+
             </div>
         </div>
     </div>

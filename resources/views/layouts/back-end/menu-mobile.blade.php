@@ -20,6 +20,9 @@
                 <li class="ripple">
                     <a href="{{route("videos")}}"><span class="fa fa-video-camera"></span>Videos</a>
                 </li>
+                <li class="ripple">
+                    <a href="{{route("editRequisitos")}}"><span class="fa fa-video-camera"></span>Requisitos</a>
+                </li>
             </ul>
         </div>
     </div>

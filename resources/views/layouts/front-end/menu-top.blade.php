@@ -43,7 +43,7 @@
     <!-- Mobile Menu Start -->
     <ul class="wpb-mobile-menu">
         <li>
-            <a href="{{route("home")}}">Inicio</a>
+            <a class="active" href="{{route("home")}}">Inicio</a>
         </li>
         <li>
             <a href="{{route("somos")}}">Nosotros</a>
