@@ -388,7 +388,13 @@ class AdminController extends Controller
     {
         DB::beginTransaction();
         try {
-            Albun::find($request->input('id'))->delete();
+            $album = Albun::find($request->input('id'));
+            $album->getImagenes;
+            foreach ($album->getImagenes as $imagen){
+                unlink("images/".utf8_decode($imagen->url));
+                unlink("images/thumbs/".utf8_decode($imagen->url));
+            }
+            $album->delete();
             DB::commit();
             $data = ["estado" => true, "mensaje" => "exito"];
         } catch (\Exception $e) {

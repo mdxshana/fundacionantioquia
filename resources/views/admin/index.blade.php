@@ -465,7 +465,7 @@
         }
 
         function validarUpload($cantImagenes) {
-            if($cantImagenes != 6) {
+            if($cantImagenes < 8) {
                 $("#divUploadImages").html("<div class='tema'>" +
                         "<label class='control-label'>Agregar nuevas</label>" +
                         "<input id='inputGalery' name='inputGalery[]' type='file'  multiple class='file-loading' accept='image/*'>" +
@@ -473,9 +473,9 @@
                 imagesUploaded=0;
                 $("#inputGalery").fileinput({
                     uploadAsync : true,
-                    uploadUrl : 'subirimagen',
+                    uploadUrl : 'admin/subirimagen',
                     language: "es",
-                    maxFileCount: 6-(totalGaleria),
+                    maxFileCount: 8-(totalGaleria),
                     showUpload: true,
                     uploadExtraData : {album:"{!!$galeria->id!!}"},
                     previewFileType: 'image',

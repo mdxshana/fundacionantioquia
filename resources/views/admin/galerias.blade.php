@@ -135,7 +135,8 @@
         var totalAlbums;
         $(function(){
             $(".album").click(function(){
-                window.location="/admin/album/"+$(this).parent().data('album');
+//                console.log($(this));
+//                window.location="/admin/album/"+$(this).parent().data('album');
             });
 
             totalAlbums = '{{count($albums)}}';
@@ -143,6 +144,7 @@
                 $(this).confirmation({
                     onConfirm: function (e) {
                         ajaxEliminarAlbum($(this));
+
                     }
                 });
             });
@@ -151,6 +153,7 @@
         function ajaxEliminarAlbum(elemento, e) {
             if (totalAlbums > 1) {
                 elemento = elemento.parent().parent().parent().parent().parent();
+                console.log(elemento.data('album'));
                 $.ajax({
                     type: "POST",
                     context: document.body,
@@ -170,6 +173,7 @@
                     error: function (data) {
                     }
                 });
+
             }
             else {
                 $("#modalTitulo").html("Error!");
