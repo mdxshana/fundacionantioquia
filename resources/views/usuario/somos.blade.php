@@ -44,7 +44,7 @@
                     <!-- Start Touch Slider -->
                     <div class="touch-slider" data-slider-navigation="true" data-slider-pagination="true">
                         @foreach($images as $image)
-                        <div class="item"><img alt="" src="images/{{$image->imagen}}" width="458" height="275"></div>
+                            <div class="item"><img alt="" src="images/{{$image->imagen}}"></div>
                         @endforeach
                     </div>
                     <!-- End Touch Slider -->
@@ -78,6 +78,13 @@
 
                     <!-- Some Text -->
                     {!! $vision->texto !!}
+                </div>
+
+                <div class="col-md-12" style="margin-top: 30px;">
+                    <div class="big-title text-center">
+                        <h3 class="classic-title"> <span><strong>Modelo de atención "TEO-TERAPÉUTICO"</strong></span></h3>
+                    </div>
+                    {!! $modelo->texto !!}
                 </div>
 
             </div>

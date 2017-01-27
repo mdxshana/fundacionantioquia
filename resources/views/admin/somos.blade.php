@@ -49,8 +49,11 @@
                     <li role="presentation">
                         <a href="#tabs-demo7-area3" id="tabs-demo6-3" role="tab" data-toggle="tab" aria-expanded="false">Visión</a>
                     </li>
+                    <li role="presentation">
+                        <a href="#tabs-demo7-area4" id="tabs-demo6-4" role="tab" data-toggle="tab" aria-expanded="false">Modelo de Atención</a>
+                    </li>
                     <li role="presentation" class="">
-                        <a href="#tabs-demo7-area4" role="tab" id="tabs-demo6-4" data-toggle="tab" aria-expanded="false">Imagenes</a>
+                        <a href="#tabs-demo7-area5" role="tab" id="tabs-demo6-5" data-toggle="tab" aria-expanded="false">Imagenes</a>
                     </li>
                 </ul>
                 <div id="tabsDemo6Content" class="tab-content tab-content-v6 col-md-12">
@@ -144,6 +147,35 @@
                     </div>
                     {{--tab 4--}}
                     <div role="tabpanel" class="tab-pane fade" id="tabs-demo7-area4" aria-labelledby="tabs-demo7-area4">
+                        <div class="row mar-bot15">
+                            <div class="col-md-12 textos">Edita el texto que aparece en la seccion de <b>Modelo de Atención</b> </div>
+                        </div>
+                        <form id="textoModelo">
+                            <div class="row">
+                                <div class="col-xs-12" style="margin-bottom: 15px">
+                        <textarea id='infoModelo' name='infoModelo' rows='10' cols='30' style='height:440px'>
+                                {!! $modelo->texto !!}
+                        </textarea>
+                                </div>
+                            </div>
+
+                            <div class="row mar-bot15">
+                                <div class="col-sm-6 col-sm-offset-6 text-right" style="color: red;"><b>*Atencion: </b>Estos cambios se reflejan directamente en la página principal, edita apropiadamente esta sección.</div>
+                            </div>
+
+                            <div class="row mar-bot15">
+                                <div class="col-xs-12 text-right">
+                                    <button type='submit' class='btn btn-primary'>Guardar</button>
+                                </div>
+                            </div>
+                        </form>
+
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-10 col-sm-offset-1" id="alertTextoModelo"></div>
+                        </div>
+                    </div>
+                    {{--tab 5--}}
+                    <div role="tabpanel" class="tab-pane fade" id="tabs-demo7-area5" aria-labelledby="tabs-demo7-area5">
                         <div class="row" style="margin: 30px 0;">
                             <h2>Imagen actual en la sección de Nosotros</h2>
                             <img id="imgsomos" alt="" src="/images/{{$imageSomos->imagen}}" style="max-width: 100%;
@@ -205,6 +237,7 @@
                 ]
 
             }).config.resize_enabled = false;
+
             CKEDITOR.instances.infoSomos.on('key',function(event){
                 var deleteKey = 46;
                 var backspaceKey = 8;
@@ -233,6 +266,7 @@
                 ]
 
             }).config.resize_enabled = false;
+
             CKEDITOR.instances.infoMision.on('key',function(event){
                 var deleteKey = 46;
                 var backspaceKey = 8;
@@ -261,6 +295,7 @@
                 ]
 
             }).config.resize_enabled = false;
+
             CKEDITOR.instances.infoVision.on('key',function(event){
                 var deleteKey = 46;
                 var backspaceKey = 8;
@@ -276,7 +311,34 @@
                 }
             });
 
+            CKEDITOR.replace('infoModelo', {
+                toolbar: [
+                    { name: 'basicstyles', items: [ 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript','Superscript'] },
+                    { name: 'clipboard', items: [ 'Undo', 'Redo' ] },
+                    { name: 'styles', items: [ 'Font', 'FontSize' ] },
+                    { name: 'colors', items: [ 'TextColor', 'BGColor' ] },
+                    { name: 'align', items: [ 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock' ] },
+                    { name: 'paragraph', items: [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent' ] },
+                    { name: 'insert', items: [ 'Table' ] },
+                    { name: 'editing', items: [ 'Scayt' ] }
+                ]
 
+            }).config.resize_enabled = false;
+
+            CKEDITOR.instances.infoModelo.on('key',function(event){
+                var deleteKey = 46;
+                var backspaceKey = 8;
+                var keyCode = event.data.keyCode;
+                if (keyCode === deleteKey || keyCode === backspaceKey)
+                    return true;
+                else
+                {
+                    var textLimit = 400;
+                    var str = CKEDITOR.instances.infoModelo.getData();
+                    if (str.length >= textLimit)
+                        return false;
+                }
+            });
 
 
 
@@ -458,6 +520,38 @@
             }
             else {
                 $("#alertTextoVision").html("<div class='alert alert-danger alert-dismissible' role='alert'>" +
+                    "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>" +
+                    "<span aria-hidden='true'>&times;</span>" +
+                    "</button>" +
+                    "<strong>Error!</strong> Debes ingresar algún texto para mostrar en la página principal.</div>");
+            }
+        });
+
+        $('#textoModelo').on('submit', function (e) {
+            e.preventDefault();
+            var contenido = encodeURIComponent((CKEDITOR.instances.infoModelo.getData().split("\n").join("")).replace(/"/g,'\'').split("\t").join(""));
+            if (contenido != "") {
+                $.ajax({
+                    type: "POST",
+                    context: document.body,
+                    url: '{{route('editTexto')}}',
+                    data: "&inicio=" + JSON.stringify({id:'{{$modelo->id}}', texto:contenido}),
+                    success: function (data) {
+                        if (data == "exito"){
+                            $("#alertTextoModelo").html("<div class='alert alert-success alert-dismissible' role='alert'>" +
+                                "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>" +
+                                "<span aria-hidden='true'>&times;</span>" +
+                                "</button>" +
+                                "<strong>Correcto!</strong> El contenido de la pagina de inicio ha sido actualizado con exito.</div>");
+                        }
+                    },
+                    error: function () {
+                        console.log('error en la concexción');
+                    }
+                });
+            }
+            else {
+                $("#alertTextoModelo").html("<div class='alert alert-danger alert-dismissible' role='alert'>" +
                     "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>" +
                     "<span aria-hidden='true'>&times;</span>" +
                     "</button>" +
