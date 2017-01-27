@@ -26,8 +26,8 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('reset
 
 
 
-Route::get('home', function(){return view('usuario.animacion');});
-Route::get('/', 'UsuarioController@home')->name("home");
+Route::get('/', function(){return view('usuario.animacion');});
+Route::get('/home', 'UsuarioController@home')->name("home");
 Route::get('/servicios', 'UsuarioController@getServicios')->name('getServicios');
 Route::get('/pdf', 'UsuarioController@getPDF')->name('getPDF');
 Route::get('/galeria', 'UsuarioController@getGalerias')->name('getGalerias');
