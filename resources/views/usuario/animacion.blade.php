@@ -119,7 +119,7 @@
         setTimeout(function () {
             window.location = '{{route('home')}}';
         }, 15000);
-        
+
 
 
 
