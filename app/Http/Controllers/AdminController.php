@@ -183,7 +183,6 @@ class AdminController extends Controller
         return view('superAdmin.addAdmin', $data);
     }
 
-
     /**
      * @return string
      */
@@ -259,7 +258,6 @@ class AdminController extends Controller
 
     }
 
-
     /**
      * @return array
      */
@@ -323,6 +321,12 @@ class AdminController extends Controller
         $file = $request->file('fotoServicio');
         if ($file != null){
             $name = time().$file->getClientOriginalName();
+            $extension = explode(".", $file->getClientOriginalName());
+            $cantidad = count($extension) - 1;
+            $extension = $extension[$cantidad];
+
+
+            //dd($extension);
             DB::beginTransaction();
             try {
                 $servicio = new Servicio();
@@ -330,9 +334,30 @@ class AdminController extends Controller
                 $servicio->descripcion = $request->titulo;
                 $servicio->imagen = $name;
                 $servicio->save();
-                DB::commit();
-                $file->move('images', $name);
 
+                $file->move("images/" , utf8_decode($name));
+
+                if(strtolower ($extension) == 'jpg') {
+                    $estampa = imagecreatefromjpeg("images/" . utf8_decode($name));
+                }
+                else {
+                    $estampa = imagecreatefrompng("images/" . utf8_decode($name));
+                }
+
+                list($ancho, $alto) = getimagesize("images/" . utf8_decode($name));
+
+                $temp = imagecreatetruecolor(480,300);
+                imagecopyresampled($temp, $estampa, 0, 0, 0, 0, 480, 300, $ancho, $alto);
+                imagedestroy($estampa);
+
+                if($extension == 'jpg') {
+                    imagejpeg($temp, 'images/'.$name, 95);
+                }
+                else {
+                    imagepng($temp, 'images/'.$name);
+                }
+
+                DB::commit();
                 $data = ["estado" => true, "mensaje" => "exito", 'nueva' => $name, 'id' => $servicio->id, 'titulo' => $servicio->descripcion];
             } catch (\Exception $e) {
                 DB::rollBack();

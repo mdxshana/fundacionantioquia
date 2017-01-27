@@ -11,7 +11,7 @@
 
   <!-- Responsive Metatag -->
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
+  <meta name="keywords" content="fundación,fundaciones,rehabilitacion,adicción,teo-terapeutico,teo-terapia">
   <!-- Page Description and Author -->
   <meta name="description" content="Margo - Responsive HTML5 Template">
   <meta name="author" content="iThemesLab">

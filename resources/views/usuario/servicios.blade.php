@@ -99,7 +99,7 @@
                 <div class="col-md-10">
                     <h3 class="classic-title"><span>Servicio de internado</span></h3>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-7">
                     {!! $internado !!}<br>
                     <p><b>¿Deseas obtener mas informacion?:</b></p>
                     <div class="text-center pdf col-md-4 col-md-offset-4" data-toggle="tooltip" data-placement="bottom" title="Descargar archivo!">
@@ -112,15 +112,22 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="blog-post image-post">
-                        <div class="post-head text-center">
-                            <a class="lightbox" title="{{$servicio->descripcion}}" href="images/{{$servicio->imagen}}">
-                                <div class="thumb-overlay"><i class="fa fa-arrows-alt"></i></div>
-                                <img src="images/{{$servicio->imagen}}" id="imagenServicio">
-                            </a>
+                <div class="col-md-5">
+                    {{--<div class="blog-post image-post">--}}
+                    {{--<div class="post-head text-center">--}}
+                    {{--<a class="lightbox" title="{{$servicio->descripcion}}" href="images/{{$servicio->imagen}}">--}}
+                    {{--<div class="thumb-overlay"><i class="fa fa-arrows-alt"></i></div>--}}
+                    {{--<img src="images/{{$servicio->imagen}}" id="imagenServicio">--}}
+                    {{--</a>--}}
+                    {{--</div>--}}
+                    {{--</div>--}}
+                    <!-- Start Touch Slider -->
+                        <div class="touch-slider" data-slider-navigation="true" data-slider-pagination="true">
+                            @foreach($images as $image)
+                                <div class="item"><img alt="" src="images/{{$image->imagen}}"></div>
+                            @endforeach
                         </div>
-                    </div>
+                        <!-- End Touch Slider -->
                 </div>
             </div>
         </div>

@@ -80,7 +80,8 @@ class UsuarioController extends Controller
         foreach ($servicios as $servicio) {
             $arrayServ[]=$servicio;
         }
-        
+
+        $data["images"]=$images = Servicio::where("nombre","servicio")->get();
         $data['servicio'] = $servicios[array_rand($arrayServ, 1)];
 
         return view('usuario.servicios', $data);
