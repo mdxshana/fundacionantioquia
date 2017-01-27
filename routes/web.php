@@ -26,11 +26,12 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('reset
 
 
 
-//Route::get('home', function(){return view('layouts.front-end.layout');});
+Route::get('home', function(){return view('usuario.animacion');});
 Route::get('/', 'UsuarioController@home')->name("home");
 Route::get('/servicios', 'UsuarioController@getServicios')->name('getServicios');
 Route::get('/pdf', 'UsuarioController@getPDF')->name('getPDF');
 Route::get('/galeria', 'UsuarioController@getGalerias')->name('getGalerias');
+Route::post('/getImages', 'UsuarioController@getImgsAlbum')->name('getImgsAlbum');
 
 
 Route::group(['middleware' => ['auth', 'super']], function () {
@@ -74,9 +75,13 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::post('admin/subirvideo', 'AdminController@subirvideo')->name('subirvideo');
     Route::post('admin/editInfoVideo', 'AdminController@editInfoVideo')->name('editInfoVideo');
     Route::post('admin/removeVideo', 'AdminController@removeVideo')->name('removeVideo');
+    Route::get('admin/galerias', 'AdminController@editGalerias')->name('editGalerias');
+    Route::post('admin/subirAlbum', 'AdminController@subirAlbum')->name('subirAlbum');
+    Route::post('admin/updateAlbum', 'AdminController@updateAlbum')->name('updateAlbum');
+    Route::post('admin/borrarAlbum', 'AdminController@deleteAlbum')->name('deleteAlbum');
+    Route::get('admin/album/{id}', 'AdminController@editAlbum')->name('editAlbum');
 
 
-    
 });
 
 Route::get('contacto', 'UsuarioController@contacto')->name('contacto');

@@ -32,7 +32,7 @@
                 <div class="col-md-7">
 
                     <!-- Classic Heading -->
-                    <h4 class="classic-title"><span>Quienes Somos</span></h4>
+                    <h3 class="classic-title"><span>Quienes Somos</span></h3>
 
                     <!-- Some Text -->
                     {!! $somos->texto !!}
@@ -44,7 +44,7 @@
                     <!-- Start Touch Slider -->
                     <div class="touch-slider" data-slider-navigation="true" data-slider-pagination="true">
                         @foreach($images as $image)
-                        <div class="item"><img alt="" src="images/{{$image->imagen}}"></div>
+                            <div class="item"><img alt="" src="images/{{$image->imagen}}"></div>
                         @endforeach
                     </div>
                     <!-- End Touch Slider -->
@@ -64,7 +64,7 @@
                 <div class="col-md-6">
 
                     <!-- Classic Heading -->
-                    <h4 class="classic-title"><span>Misión</span></h4>
+                    <h3 class="classic-title"><span>Misión</span></h3>
 
                     <!-- Some Text -->
                     {!! $mision->texto !!}
@@ -74,10 +74,17 @@
                 <div class="col-md-6">
 
                     <!-- Classic Heading -->
-                    <h4 class="classic-title"><span>Visión</span></h4>
+                    <h3 class="classic-title"><span>Visión</span></h3>
 
                     <!-- Some Text -->
                     {!! $vision->texto !!}
+                </div>
+
+                <div class="col-md-12" style="margin-top: 30px;">
+                    <div class="big-title text-center">
+                        <h3 class="classic-title"> <span><strong>Modelo de atención "TEO-TERAPÉUTICO"</strong></span></h3>
+                    </div>
+                    {!! $modelo->texto !!}
                 </div>
 
             </div>

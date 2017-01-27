@@ -80,7 +80,8 @@ class UsuarioController extends Controller
         foreach ($servicios as $servicio) {
             $arrayServ[]=$servicio;
         }
-        
+
+        $data["images"]=$images = Servicio::where("nombre","servicio")->get();
         $data['servicio'] = $servicios[array_rand($arrayServ, 1)];
 
         return view('usuario.servicios', $data);
@@ -92,7 +93,7 @@ class UsuarioController extends Controller
     public function somos()
     {
 
-        $textos = Texto::whereIn("titulo",["somos","vision","mision"])->get();
+        $textos = Texto::whereIn("titulo",["somos","vision","mision","modelo"])->get();
         $data = array();
 
         $images = Servicio::whereIn("nombre",["servicio","somos"])->get();
@@ -102,6 +103,7 @@ class UsuarioController extends Controller
         $data["somos"] = $textos->whereIn("titulo",["somos"])->first();
         $data["vision"] = $textos->whereIn("titulo",["vision"])->first();
         $data["mision"] = $textos->whereIn("titulo",["mision"])->first();
+        $data["modelo"] = $textos->whereIn("titulo",["modelo"])->first();
 
         $data["images"]=$images->whereIn("nombre",["servicio"]);
         $data["imageSomos"]=$images->whereIn("nombre",["somos"])->first();
@@ -113,7 +115,27 @@ class UsuarioController extends Controller
 
     public function getGalerias()
     {
-        return view('usuario.galerias');
+        $albums = Albun::where('tipo', '=', 'A')->get();
+        foreach ($albums as $album){
+            $album->cantImgs = count($album->getImagenes);
+            $album->portada = $album->getImagenes->first();
+        }
+        $data['albums'] = $albums;
+//        dd($data);
+        return view('usuario.galerias', $data);
+    }
+
+    public function getImgsAlbum(Request $request)
+    {
+        $album = Albun::find($request->id);
+        if($album != null){
+            $imagenes = $album->getImagenes;
+            $data['imagenes'] = $imagenes;
+//            dd($data);
+            return $data;
+        }
+        else
+            return "Error de conexion.";
     }
 
     public function getVideos()

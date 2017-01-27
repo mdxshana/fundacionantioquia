@@ -158,9 +158,9 @@
 
                 <!-- Info - List -->
                 <ul class="list-unstyled">
-                    <li><strong>Lunes - viernes</strong> - 8am to 6pm</li>
-                    <li><strong>Sabado</strong> - 9am to 2pm</li>
-                    <li><strong>Domingo</strong> - cerrado</li>
+                    <li><strong>Lunes - viernes</strong> - 8am a 6pm</li>
+                    <li><strong>Sabado</strong> - 9am a 2pm</li>
+                    <li><strong>Domingo</strong> - Visitas 1pm a 5pm</li>
                 </ul>
 
             </div>

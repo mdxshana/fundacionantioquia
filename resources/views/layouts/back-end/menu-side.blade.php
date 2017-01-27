@@ -19,10 +19,13 @@
                 <a href="{{route("nosotros")}}"><span class="fa fa-users"></span>Nosotros</a>
             </li>
             <li class="ripple">
-                <a href="{{route("editHome")}}"><span class="fa fa-picture-o"></span>Galeria</a>
+                <a href="{{route("editGalerias")}}"><span class="fa fa-picture-o"></span>Galeria</a>
             </li>
             <li class="ripple">
                 <a href="{{route("videos")}}"><span class="fa fa-video-camera"></span>Videos</a>
+            </li>
+            <li class="ripple">
+                <a href="{{route("editRequisitos")}}"><span class="fa fa-video-camera"></span>Requisitos</a>
             </li>
 
             {{--<li class="ripple">--}}

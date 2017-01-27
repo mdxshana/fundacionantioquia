@@ -40,18 +40,18 @@
             cursor: pointer;
             padding: 5px;
             padding-top: 8px;
-            -webkit-transition: all 1s ease;
-            -moz-transition: all 1s ease;
-            -ms-transition: all 1s ease;
-            transition: all 1s ease;
+            -webkit-transition:all .9s ease; /* Safari y Chrome */
+            -moz-transition:all .9s ease; /* Firefox */
+            -o-transition:all .9s ease; /* IE 9 */
+            -ms-transition:all .9s ease;
         }
         .pdf:hover{
             color: #000;
-            -webkit-box-shadow:0 1px 5px 0 #000;
-            -moz-box-shadow:0 1px 5px 0 #000;
-            box-shadow:0 1px 5px 0 #000;
-            border-radius: 5px;
-            margin-top: 10px;
+            -webkit-transform:scale(1.25);
+            -moz-transform:scale(1.25);
+            -ms-transform:scale(1.25);
+            -o-transform:scale(1.25);
+            transform:scale(1.25);
         }
     </style>
 @endsection
@@ -99,7 +99,7 @@
                 <div class="col-md-10">
                     <h3 class="classic-title"><span>Servicio de internado</span></h3>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-7">
                     {!! $internado !!}<br>
                     <p><b>¿Deseas obtener mas informacion?:</b></p>
                     <div class="text-center pdf col-md-4 col-md-offset-4" data-toggle="tooltip" data-placement="bottom" title="Descargar archivo!">
@@ -112,15 +112,22 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="blog-post image-post">
-                        <div class="post-head text-center">
-                            <a class="lightbox" title="{{$servicio->descripcion}}" href="images/{{$servicio->imagen}}">
-                                <div class="thumb-overlay"><i class="fa fa-arrows-alt"></i></div>
-                                <img src="images/{{$servicio->imagen}}" id="imagenServicio">
-                            </a>
+                <div class="col-md-5">
+                    {{--<div class="blog-post image-post">--}}
+                    {{--<div class="post-head text-center">--}}
+                    {{--<a class="lightbox" title="{{$servicio->descripcion}}" href="images/{{$servicio->imagen}}">--}}
+                    {{--<div class="thumb-overlay"><i class="fa fa-arrows-alt"></i></div>--}}
+                    {{--<img src="images/{{$servicio->imagen}}" id="imagenServicio">--}}
+                    {{--</a>--}}
+                    {{--</div>--}}
+                    {{--</div>--}}
+                    <!-- Start Touch Slider -->
+                        <div class="touch-slider" data-slider-navigation="true" data-slider-pagination="true">
+                            @foreach($images as $image)
+                                <div class="item"><img alt="" src="images/{{$image->imagen}}"></div>
+                            @endforeach
                         </div>
-                    </div>
+                        <!-- End Touch Slider -->
                 </div>
             </div>
         </div>

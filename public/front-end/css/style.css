@@ -123,8 +123,9 @@ h6 {
 }
 
 p {
+	text-align: justify;
     color: #666;
-    font-size: 13px;
+    font-size: 15px;
     font-family: 'Open Sans', sans-serif;
     line-height: 22px;
     margin: 0;
@@ -602,10 +603,10 @@ ul.social-list li:last-child a i {
 }
 
 .navbar-default .navbar-nav > li > a {
-	color: #999;
+	color: #ffb8f4;
 	display: block;
-    font-size: 14px;
-	font-weight: 300;
+    font-size: 17px;
+	font-weight: 600;
     padding: 28px 15px 28px 15px;
 	overflow: hidden;
     transition: all 0.3s ease-in-out;
@@ -629,10 +630,10 @@ ul.social-list li:last-child a i {
 	content: '';
 	left: 50%;
 	display: block;
-	height: 5px;
-	width: 5px;
+	height: 15px;
+	width: 15px;
 	opacity: 0;
-	margin: 0 0 -3px -2px;
+	margin: 0 0 -8px -5px;
 	-webkit-transform: rotate(45deg);
 	-moz-transform: rotate(45deg);
 	-ms-transform: rotate(45deg);

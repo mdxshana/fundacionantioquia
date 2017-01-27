@@ -109,9 +109,7 @@
             margin-left: 20px;
             margin-right: 20px;
         }
-        .btn-xs{
-            padding: 4px 10px;
-        }
+
         .confirmation .popover-content {
             width: 125px;
         }
@@ -273,7 +271,7 @@
                     <p>Some text in the modal.</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Entendido!</button>
                 </div>
             </div>
 
@@ -373,7 +371,7 @@
                 $(this).confirmation({
                     onConfirm: function () {
                         ajaxEliminarImagen($(this).parent().parent());
-                        totalGaleria--;
+
                         validarUpload(totalGaleria);
                     }
                 });
@@ -393,7 +391,6 @@
             $(this).confirmation({
                 onConfirm: function () {
                     ajaxEliminarImagen($(this).parent().parent());
-                    totalGaleria--;
                     validarUpload(totalGaleria);
                 }
             });
@@ -409,19 +406,32 @@
         });
 
         function ajaxEliminarImagen(elemento) {
-            $.ajax({
-                type:"POST",
-                context: document.body,
-                url: '{{route('deleteImage')}}',
-                data: "&id=" + elemento.attr('data-id') + "&ruta=" + elemento.attr('data-ruta'),
-                success: function(data){
-                    if (data == "exito"){
-                        elemento.remove();
+            if (totalGaleria > 1) {
+                $.ajax({
+                    type: "POST",
+                    context: document.body,
+                    url: '{{route('deleteImage')}}',
+                    data: "&id=" + elemento.attr('data-id') + "&ruta=" + elemento.attr('data-ruta'),
+                    success: function (data) {
+                        if (data.estado) {
+                            elemento.remove();
+                            totalGaleria--;
+                        }
+                        else{
+                            $("#modalTitulo").html("Error!");
+                            $("#modalCuerpo").html(data.mensaje);
+                            $("#modalNotif").modal();
+                        }
+                    },
+                    error: function (data) {
                     }
-                },
-                error: function(data){
-                }
-            });
+                });
+            }
+            else{
+                $("#modalTitulo").html("Error!");
+                $("#modalCuerpo").html("La galeria de la pagina principal debe contener al menos una imagen.");
+                $("#modalNotif").modal();
+            }
         }
 
         function ajaxEliminarServicio(elemento) {
@@ -449,13 +459,13 @@
             }
             else{
                 $("#modalTitulo").html("Error!");
-                $("#modalCuerpo").html("No se permitirá tener menos de 4 servicios registrados!");
+                $("#modalCuerpo").html("Se deben tener al menos 4 servicios registrados para mostrar en la pagina principal!");
                 $("#modalNotif").modal();
             }
         }
 
         function validarUpload($cantImagenes) {
-            if($cantImagenes != 6) {
+            if($cantImagenes < 8) {
                 $("#divUploadImages").html("<div class='tema'>" +
                         "<label class='control-label'>Agregar nuevas</label>" +
                         "<input id='inputGalery' name='inputGalery[]' type='file'  multiple class='file-loading' accept='image/*'>" +
@@ -463,9 +473,9 @@
                 imagesUploaded=0;
                 $("#inputGalery").fileinput({
                     uploadAsync : true,
-                    uploadUrl : 'subirimagen',
+                    uploadUrl : 'admin/subirimagen',
                     language: "es",
-                    maxFileCount: 6-(totalGaleria),
+                    maxFileCount: 8-(totalGaleria),
                     showUpload: true,
                     uploadExtraData : {album:"{!!$galeria->id!!}"},
                     previewFileType: 'image',

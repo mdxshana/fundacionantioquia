@@ -44,19 +44,19 @@ a.main-button, input[type="submit"] {
 }
 .navbar-default .navbar-nav > li:hover > a,
 .navbar-default .navbar-nav > li > a.active {
-	color: #ffb8f4;
+	color: #ff7aec;
 }
 
 .dropdown > li:hover > a, .sup-dropdown li:hover > a {
-	color: #ffb8f4;
+	color: #ff7aec;
 }
 
 .navbar-default .navbar-nav > li > a:after {
-	background-color: #ffb8f4;
+	background-color: #ff7aec;
 }
 
 .navbar-default .navbar-nav > li > a.active, .navbar-default .navbar-nav > li:hover > a {
-	border-color: #ffb8f4;
+	border-color: #ff7aec;
 }
 
 .dropdown  li a.active, .sup-dropdown li a.active {
