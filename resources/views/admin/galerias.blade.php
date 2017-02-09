@@ -185,7 +185,7 @@
         $("#albums").on('click', '.eliminar', function(){
             $(this).confirmation({
                 onConfirm: function () {
-                    ajaxEliminarAlbum($(this).parent().parent().parent().parent().parent());
+                    ajaxEliminarAlbum($(this).parents('.panel-album'));
                 }
             });
         });
