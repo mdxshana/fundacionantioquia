@@ -5,13 +5,13 @@
         .pointer{
             cursor: pointer;
         }
-        .album, .nuevo{
+        .panel-album, .nuevo{
             -webkit-transition:all .9s ease; /* Safari y Chrome */
             -moz-transition:all .9s ease; /* Firefox */
             -o-transition:all .9s ease; /* IE 9 */
             -ms-transition:all .9s ease;
         }
-        .album:hover, .nuevo:hover{
+        .panel-album:hover, .nuevo:hover{
             -webkit-transform:scale(1.13);
             -moz-transform:scale(1.13);
             -ms-transform:scale(1.13);
@@ -41,7 +41,7 @@
             background-color: rgb(251, 255, 255);
             cursor: pointer;
         }
-        .abuelo{
+        .panel-album{
             position: relative;
         }
         .confirmation .popover-content {
@@ -85,24 +85,26 @@
             </div>
 
             @foreach($albums as $album)
-                <div class="col-xs-6 col-sm-6 col-md-3 col-lg-2" data-album="{{$album->id}}">
-                    <div class="panel pointer album">
-                        <div class="panel-body abuelo" style="padding: 0;">
-                            <center>
-                                <div class="editProfPic">
-                                    <i class='fa fa-trash fa-2x eliminar manito' aria-hidden='true' data-toggle='confirmation' data-singleton="true" data-placement='top' title='Atencion!'  data-content="El álbum y sus imágenes se borrarán, ¿Continuar?:" data-btn-ok-label="Si" data-btn-cancel-label="No"></i>
-                                </div>
-                                @if($album->portada != null)
-                                    <img src="/images/{{$album->portada->url}}" width="100%" height="158px">
-                                @else
-                                    <img src="/images/noImage.png" width="100%" height="158px">
-                                @endif
-                            </center>
+                <div class="col-xs-6 col-sm-6 col-md-3 col-lg-2">
+                    <div class="panel pointer panel-album" data-album="{{$album->id}}">
+                        <div class="editProfPic">
+                            <i class='fa fa-trash fa-2x eliminar manito' aria-hidden='true' data-toggle='confirmation' data-singleton="true" data-placement='top' title='Atencion!'  data-content="El álbum y sus imágenes se borrarán, ¿Continuar?:" data-btn-ok-label="Si" data-btn-cancel-label="No"></i>
                         </div>
-                        <div class="panel-footer">
-                            <b>{{$album->nombre}}</b><br>
-                            <b>{{$album->cantImgs}}</b>
-                            {{($album->cantImgs==1)?'Imagen':'Imagenes'}}
+                        <div class="album">
+                            <div class="panel-body" style="padding: 0;">
+                                <center>
+                                    @if($album->portada != null)
+                                        <img src="/images/{{$album->portada->url}}" width="100%" height="158px">
+                                    @else
+                                        <img src="/images/noImage.png" width="100%" height="158px">
+                                    @endif
+                                </center>
+                            </div>
+                            <div class="panel-footer">
+                                <b>{{$album->nombre}}</b><br>
+                                <b>{{$album->cantImgs}}</b>
+                                {{($album->cantImgs==1)?'Imagen':'Imagenes'}}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -136,14 +138,14 @@
         $(function(){
             $(".album").click(function(){
 //                console.log($(this));
-//                window.location="/admin/album/"+$(this).parent().data('album');
+                window.location="/admin/album/"+$(this).parent().data('album');
             });
 
             totalAlbums = '{{count($albums)}}';
             $(".eliminar").each(function(){
                 $(this).confirmation({
                     onConfirm: function (e) {
-                        ajaxEliminarAlbum($(this));
+                        ajaxEliminarAlbum($(this).parents('.panel-album'));
 
                     }
                 });
@@ -152,8 +154,6 @@
 
         function ajaxEliminarAlbum(elemento, e) {
             if (totalAlbums > 1) {
-                elemento = elemento.parent().parent().parent().parent().parent();
-                console.log(elemento.data('album'));
                 $.ajax({
                     type: "POST",
                     context: document.body,
@@ -161,7 +161,7 @@
                     data: "&id=" + elemento.data('album'),
                     success: function (data) {
                         if (data.estado) {
-                            elemento.remove();
+                            elemento.parent().remove();
                             totalAlbums--;
                         }
                         else{
@@ -185,7 +185,7 @@
         $("#albums").on('click', '.eliminar', function(){
             $(this).confirmation({
                 onConfirm: function () {
-                    ajaxEliminarAlbum($(this).parent().parent().parent().parent().parent());
+                    ajaxEliminarAlbum($(this).parents('.panel-album'));
                 }
             });
         });
