@@ -180,13 +180,13 @@
         $(function () {
             map = new GMaps({
                 el: '#map',
-                lat: 4.1349238,
-                lng: -73.6261258
+                lat: 4.074491, 
+                lng: -73.712583
             });
             map.addMarker({
-                lat: 4.1349238,
+                lat: 4.074491,
                 draggable: false,
-                lng: -73.6261258,
+                lng: -73.712583,
                 infoWindow: {
                     content: '<h4>Fundacion Social Antioquía</h4><p>Ven y visitanos</p>'
                 }
