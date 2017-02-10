@@ -51,7 +51,7 @@ class AdminController extends Controller
 
                 $album = Albun::find($request->album);
                 if($album->tipo == 'A'){
-                    if($extension == 'jpg') {
+                    if(strtolower ($extension) == 'jpg') {
                         $estampa = imagecreatefromjpeg("images/" . utf8_decode($nombre));
                     }
                     else {
@@ -64,7 +64,7 @@ class AdminController extends Controller
                     imagecopyresampled($temp, $estampa, 0, 0, 0, 0, 480, 480, $ancho, $alto);
                     imagedestroy($estampa);
 
-                    if($extension == 'jpg') {
+                    if(strtolower ($extension) == 'jpg') {
                         imagejpeg($temp, 'images/thumbs/'.$nombre, 95);
                     }
                     else {
@@ -350,7 +350,7 @@ class AdminController extends Controller
                 imagecopyresampled($temp, $estampa, 0, 0, 0, 0, 480, 300, $ancho, $alto);
                 imagedestroy($estampa);
 
-                if($extension == 'jpg') {
+                if(strtolower ($extension) == 'jpg') {
                     imagejpeg($temp, 'images/'.$name, 95);
                 }
                 else {
