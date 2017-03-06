@@ -4,18 +4,56 @@
 <head>
     {!!Html::style('front-end/asset/css/bootstrap.min.css')!!}
     <style>
-        #cinta, .imagen{
+        #cinta, .imagen {
             position: absolute;
         }
-        #cinta{
+
+        body{
+            background: #31582b;
+        }
+
+        #cinta {
             right: 0;
 
         }
+        .mano1{
+            position: absolute;
+            left: 2000px;
+            z-index: 5;
+        }
+
+        .mano2{
+            position: absolute;
+            width: 100%;
+            z-index: 10;
+        }
+
+        .mano3{
+            position: absolute;
+            transform: rotate(120deg);
+            width: 100%;
+            z-index: 15;
+        }
+        .logo{
+            width: 100%;
+            position: absolute;
+            left: 2000px;
+        }
+
+        .prueba{
+            -webkit-transition: width 1s ease-in;
+            -moz-transition: width 1s ease-in;
+            -o-transition: width 1s ease-in;
+            transition: width 1s ease-in;
+            width: 100%;
+        }
+
         @media (max-width: 768px) {
-            .imagen{
+            .imagen {
                 width: 100%;
             }
-            #texto{
+
+            #texto {
                 display: none;
             }
         }
@@ -24,106 +62,107 @@
 
 <body>
 
-    <audio src="videos/audio.mp3" preload="auto" autoplay></audio>
+{{--<audio src="videos/audio.mp3" preload="auto" autoplay></audio>--}}
 
-    <img id="cinta" src="images/animacion/cinta.png" width="100%" height="100%" style="display: none">
-    <img id="1" class="imagen" src="images/animacion/1.png" width="40%" height="100%" style="display: none">
-    <img id="2" class="imagen" src="images/animacion/2.png" width="40%" height="100%" style="display: none">
-    <img id="3" class="imagen" src="images/animacion/3.png" width="40%" height="100%" style="display: none">
-    <img id="4" class="imagen" src="images/animacion/4.png" width="40%" height="100%" style="display: none">
-    <img id="5" class="imagen" src="images/animacion/5.png" width="40%" height="100%" style="display: none">
-    <img id="6" class="imagen" src="images/animacion/6.png" width="40%" height="100%" style="display: none">
-    <img id="7" class="imagen" src="images/animacion/7.png" width="40%" height="100%" style="display: none">
-
-    <img id="texto" class="imagen" src="images/animacion/letras.png" width="60%" height="100%" style="margin-left: 40%; display: none">
-
-    {{--</div>--}}
+<img src="images/animacion2/mano1.png" class="mano1">
+<img src="images/animacion2/mano2.png" class="mano2" style="display: none">
+<img src="images/animacion2/mano3.png" class="mano3"  style="display: none">
+<img src="images/animacion2/logofinal.png" class="logo" style="display: none">
+{{--</div>--}}
 </body>
 {!!Html::script('front-end/js/jquery-2.1.4.min.js')!!}
 {!!Html::script('back-end/js/jquery.ui.min.js')!!}
 {!!Html::script('front-end/asset/js/bootstrap.min.js')!!}
 <script>
-    $(document).ready(function() {
-        $(".contenedor").css('width', $(window).width() + "px");
-        $(".contenedor").css('height', $(window).height() + "px");
+    var alto;
+    var ancho;
+    $(document).ready(function () {
+        audio = new Audio();
+        audio.src ="images/animacion2/audio.mp3";
+        audio.play();
+        alto = $(window).height();
+        ancho = $(window).width();
+        $('img.mano1').width(ancho * 0.34);
+        animatemano1();
+        setTimeout(function () {
+            $('img.mano2').show();
+            $('img.mano2').animate({
+                width:ancho * 0.26,
+            },{
+                duration:500,
+                step: function (now) {
+                    $('img.mano2').css({top:$('img.mano1').height()-$('img.mano2').height()})
+                }
+            });
+            $('img.mano2').css({left:$('img.mano1')[0].offsetLeft, top:$('img.mano1')[0].offsetTop})
+
+        }, 1000)
+
+        setTimeout(function () {
+            $('img.mano3').show();
+            $('img.mano3').animate({
+                width:ancho * 0.19,
+                deg: 360
+            },{
+                duration:500,
+                step: function (now, fx) {
+                    $('img.mano3').css({top:$('img.mano1').height()-$('img.mano3').height()});
+                    if(fx.prop == "deg"){
+                        $('img.mano3').css({transform: 'rotate(' + now + 'deg)'})
+                    }
+                }
+            });
+            $('img.mano3').css({left:$('img.mano1')[0].offsetLeft})
+        }, 1500)
+
+        setTimeout(function () {
+            $("img.logo").show();
+            $("img.logo").animate({
+                left: 0
+            },500);
+            $("img.logo").css({top:$('img.mano1')[0].offsetTop+$('img.mano1').height()});
+        },2000);
 
 
-        var isMobile = {
-            Android: function() {
-                return navigator.userAgent.match(/Android/i);
-            },
-            BlackBerry: function() {
-                return navigator.userAgent.match(/BlackBerry/i);
-            },
-            iOS: function() {
-                return navigator.userAgent.match(/iPhone|iPad|iPod/i);
-            },
-            Opera: function() {
-                return navigator.userAgent.match(/Opera Mini/i);
-            },
-            Windows: function() {
-                return navigator.userAgent.match(/IEMobile/i);
-            },
-            any: function() {
-                return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
-            }
-        };
+        setTimeout(function () {
+            $("img.logo").animate({
+                algo:300
+            },{
+                duration:200,
+                step:function (now) {
+                    $("img.mano1").width((ancho * 0.34)+now)
+                    $("img.mano2").width((ancho * 0.26)+now)
+                    $("img.mano3").width((ancho * 0.19)+now)
+                }
+            })
+        }, 3500)
 
-        if(isMobile.any()){
-            $(".imagen").attr('width', '100%');
-        }
-
-        $("#1").fadeIn(2000);
         setTimeout(function () {
-            $("#2").fadeIn(1900);
-        }, 1300);
-        setTimeout(function () {
-            $("#1").fadeOut(1300);
-        }, 2250);
-        setTimeout(function () {
-            $("#3").fadeIn(1800);
-        }, 2500);
-        setTimeout(function () {
-            $("#2").fadeOut(1300);
-        }, 3400);
-        setTimeout(function () {
-            $("#4").fadeIn(1700);
-        }, 3600);
-        setTimeout(function () {
-            $("#3").fadeOut(1300);
-        }, 4450);
-        setTimeout(function () {
-            $("#5").fadeIn(1600);
-        }, 4600);
-        setTimeout(function () {
-            $("#4").fadeOut(1300);
-        }, 5400);
-        setTimeout(function () {
-            $("#6").fadeIn(1500);
-        }, 5500);
-        setTimeout(function () {
-            $("#5").fadeOut(1300);
-        }, 6250);
-
-        $("#cinta").show("slide", {
-            direction: 'right'
-        }, 7500);
-            //
-
-        if ($(window).width()>=768 && !isMobile.any()) {
-            setTimeout(function () {
-                $("#texto").show("clip", 3000);
-            }, 6300);
-        }
+            $("img.logo").animate({
+                algo:0
+            },{
+                duration:300,
+                step:function (now) {
+                    $("img.mano1").width((ancho * 0.34)+now)
+                    $("img.mano2").width((ancho * 0.26)+now)
+                    $("img.mano3").width((ancho * 0.19)+now)
+                }
+            })
+        }, 3800)
 
         setTimeout(function () {
             window.location = '{{route('home')}}';
-        }, 15000);
-
-
-
+        }, 9800);
 
     });
+
+    function animatemano1() {
+        console.log($(".mano1").width()/2);
+        $(".mano1").animate({
+            left: (ancho/2)-($(".mano1").width()/2)
+        },1000);
+    }
+
 </script>
 
 </html>
